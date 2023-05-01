@@ -3,658 +3,243 @@
 <!-- start database table -->
 <div class=" page-content-wrapper">
 
-    <div class="page-content hero2">
-        <div class="portlet light bordered " id="form_wizard_1">
-            <div class="portlet-body form">
-                <div class="row">
+  <div class="page-content hero2">
+    <div class="portlet light bordered " id="form_wizard_1">
+      <div class="portlet-body form">
+        <div class="row">
 
-                    <div class="col-md-12 mx-0">
-                        <div>
-                            <div class="form-group ">
+          <div class="col-md-12 mx-0">
+            <div>
+              <div class="form-group ">
 
-                                <div class="left">
-                                    <div class="wrapper center-block">
-                                        <div class="left">
-                                            <div class="col-md-12 mb-40 box-bd">
-                                                <div class="col-md-8">
-                                                    <h4 class="">
-                                                        <strong>Emission Input & View</strong>
-                                                    </h4>
-                                                </div>
+                <div class="left">
+                  <div class="wrapper center-block">
+                    <div class="left">
+
+                       <div class="wrapper center-block">
+                          <div class="left">
+                            <div class="col-md-12  justify-space-between">
+                              @if ($errors->any() || session('success') || isset($project_edit->id))
+                              <div class="col-md-12 mb-40 box-bd">
+                                @if ($errors->any())
+                                <div class="alert-danger pl-40">
+                                   <ol>
+                                     @foreach ($errors->all() as $error)
+                                     <li style="list-style-type:square !important">{{$error}}</li>
+                                     @endforeach
+                                 </ol>
+                             </div>
+                             @endif
+                             @if (session('success'))
+                             <div class="alert-success pl-40">
+                               {{ session('success') }}
+                           </div>
+                           @endif
+                           @if(isset($project_edit->id))
+                           <div>
+                               <h4 class="">
+                                  <strong>Add Investment</strong>
+                              </h4>
+                              <form method="post" action="{{route('employee.add-investment')}}" enctype="multipart/form-data">
+                                  @csrf
+                                  <input type="hidden" name="id" value="{{isset($project_edit->id)?$project_edit->id:''}}">
+                                  <div class="portlet-body">
+                                     <div class="col-md-6">
+                                        <label class="control-label left ">Investment Amount</label>
+                                        <input type="text" value="{{isset($project_edit->currency->symbol)?$project_edit->currency->symbol:''}}{{isset($project_edit->investment_amount)?$project_edit->investment_amount:''}}" class="form-control" name="investment_amount" readonly />
+                                    </div> 
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <label class="control-label left ">Add Your Investment Amount* </label>
+                                                <input name="employee_investment_amount" class="form-control" type="number" value="" required placeholder="0.00" />
                                             </div>
-                                            <!-- start database form -->
-                                            {{--  <div class="col-md-8 mb-40 box-bd">
-                                                <div class="portlet-body filter-none">
-                                                    <div id="sample_5_wrapper" class="dataTables_wrapper">
-                                                        <div class="table Add">
-                                                            <div class="table-scrollable">
-                                                                <table class="table table-hover  order-column dataTable" role="grid" aria-describedby="sample_5_info">
-                                                                    <thead>
-                                                                        <tr class="secondary_bg font-white">
-
-                                                                            <th style="width: 88px;">
-                                                                                Check Mark 1
-                                                                            </th>
-                                                                            <th style="width: 88px;"> Tested
-                                                                            </th>
-
-                                                                            <th style="width: 59px;"> Check Mark 2
-                                                                            </th>
-                                                                            <th style="width: 59px;"> Emission date
-                                                                            </th>
-                                                                            <th style="width: 59px;"> Action
-                                                                            </th>
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                        <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                            <td class="ft-16"><b> 3</b>
-                                                                            </td>
-                                                                            <td class="ft-16">10.000.000 €</td>
-                                                                            <td class="ft-16">3.500.000 €</td>
-                                                                            <td class="ft-16">3.500.000 €</td>
-                                                                            <td class="ft-16">
-                                                                                <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
-                                                                            </td>
-
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <table class="collapse in table table-hover  order-column dataTable" id="sample_5" role="grid" aria-describedby="sample_5_info">
-
-                                                                <thead>
-                                                                    <tr role="row " class="secondary_bg font-white">
-
-                                                                        <th style="width: 88px;">
-                                                                            Check Mark 1
-                                                                        </th>
-                                                                        <th style="width: 88px;"> Tested
-                                                                        </th>
-
-                                                                        <th style="width: 59px;"> Check Mark 2
-                                                                        </th>
-                                                                        <th style="width: 59px;"> Emission date
-                                                                        </th>
-                                                                        <th style="width: 59px;"> Action
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 1</b>
-                                                                        </td>
-                                                                        <td class="ft-16">1.000.000 €</td>
-
-                                                                        <td class="ft-16">Refinancing of 100kW PV Rooftop</td>
-                                                                        <td class="ft-16">Refinancing of 100kW PV Rooftop</td>
-                                                                        <td class="ft-16">
-                                                                            <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a>
-                                                                            <a href=""> <span class="glyphicon glyphicon-trash" style="font-size: 20px;color: black; margin-top: 20px;"></span></a>
-                                                                        </td>
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 2</b>
-                                                                        </td>
-                                                                        <td class="ft-16">4.000.000 €</td>
-
-                                                                        <td class="ft-16">
-                                                                            2/11/2023</td>
-                                                                        <td class="ft-16">Financing of 300kW PV Rooftop </td>
-                                                                        <td class="ft-16">
-                                                                            <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a>
-                                                                            <a href=""> <span class="glyphicon glyphicon-trash" style="font-size: 20px;color: black; margin-top: 20px;"></span></a>
-                                                                        </td>
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 3</b>
-                                                                        </td>
-                                                                        <td class="ft-16">5.000.000 €</td>
-
-                                                                        <td class="ft-16">
-                                                                            1/9/2023</td>
-                                                                        <td class="ft-16">....</td>
-
-                                                                        <td class="ft-16">
-                                                                            <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a>
-                                                                            <a href=""> <span class="glyphicon glyphicon-trash" style="font-size: 20px;color: black; margin-top: 20px;"></span></a>
-                                                                        </td>
-                                                                    </tr>
-
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>  --}}
-                                            <!-- start form -->
-                                            <div class="col-md-8 mb-40 box-bd">
-                                                <div class="portlet-body">
-                                                    <h4>Emission Form</Form>
-                                                    </h4>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Tested by</label>
-                                                        <input type="text" value="" class="form-control" name="" />
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left">Emission Date</label>
-                                                        <input type="date" value="" class="form-control" name="" />
-                                                    </div>
-                                                    <div class="col-md-6 mt-4">
-                                                        <label class="control-label left">Api Implemented </label><br>
-                                                        <input type="radio" name="selection" id="Yes" />
-                                                        <label for="Yes">Yes</label>
-                                                        <input type="radio" name="selection" id="No" />
-                                                        <label for="No">No</label>
-                                                    </div>
-
-                                                    <div class="col-md-6 mt-4">
-                                                        <label class="control-label left">Emission amount confirmed </label><br>
-                                                        <input type="radio" name="selection" id="Yes" />
-                                                        <label for="Yes">Yes</label>
-                                                        <input type="radio" name="selection" id="No" />
-                                                        <label for="No">No</label>
-                                                    </div>
-                                                    <button class="btn btn-primary mt-4" style="margin-left: 300px;">Submit</button>
-                                                </div>
-
+                                            <div class="col-md-4">
+                                                <label class="control-label left ">Currency*</label>
+                                                <select name="currency_id" id="" class="form-control" required>
+                                                    @foreach($currencies as $currency)
+                                                    <option value="{{$currency->id}}">{{ucfirst($currency->symbol)}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>                       
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Add</button>
+                                 </div>
 
-                                </div>
-                            </div>
+                             </div>
 
+                         </form>
+                     </div>
+                     @endif
+                 </div>
+                 @endif
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end database table 1 -->
-</div>
-<!-- start database table -->
-<div class=" page-content-wrapper">
+             </div>
 
-    <div class="page-content hero2">
-        <div class="portlet light bordered " id="form_wizard_1">
-            <div class="portlet-body form">
-                <div class="row">
+         </div>
+     </div>
 
-                    <div class="col-md-12 mx-0">
-                        <div>
-                            <div class="form-group ">
+ </div>
 
-                                <div class="left">
-                                    <div class="wrapper center-block">
-                                        <div class="left">
-                                            <div class="col-md-12 mb-40 box-bd">
-                                                <div class="col-md-8">
-                                                    <h4 class="">
-                                                        <strong>Emission View</strong>
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <!-- start database form -->
-                                            <div class="col-md-12 mb-40 box-bd">
-                                                <div class="portlet-body filter-none">
-                                                    <div id="sample_5_wrapper" class="dataTables_wrapper">
-                                                        <div class="table Add">
-                                                            <div class="table-scrollable">
-                                                                <table class="table table-hover  order-column dataTable" role="grid" aria-describedby="sample_5_info">
-                                                                    <thead>
-                                                                        <tr class="secondary_bg font-white">
-
-                                                                             <th style="width:20%;"> ID</th>
-                                                                            <th style="width:20%;"> Tested By
-                                                                            </th>
-
-            
-                                                                            <th style="width:20%;"> Emission date
-                                                                            </th>
-                                                                            <th style="width:20%;"> Api Implemented
-                                                                            </th>
-                                                                            <th style="width:20%;">
-                                                                                Emission Amount Confirmed
-                                                                            </th>
-                                                                            <th> Action</th>
-
-                                                                        </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                        <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                            <td class="ft-16"><b> 1</b>
-                                                                            </td>
-                                                                            <td class="ft-16">Zahid</td>
-                                                                            <td class="ft-16">12-23-20023</td>
-                                                                            <td class="ft-16">Yes</td>
-                                                                            <td class="ft-16">
-                                                                                NO
-                                                                               
-                                                                            </td>
-                                                                            <td><i class="bi bi-caret-up-fill" aria-hidden="true"></i></td>
-
-                                                                        </tr>
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <table class="collapse in table table-hover  order-column dataTable" id="sample_5" role="grid" aria-describedby="sample_5_info">
-
-                                                                <thead>
-                                                                    <tr role="row " class="secondary_bg font-white">
-
-                                                                        <th style="">
-                                                                            ID
-                                                                        </th>
-                                                                        <th style=""> Tested By
-                                                                        </th>
-
-                                                                        <th > Emission Date
-                                                                        </th>
-                                                                        <th >Api implemented
-                                                                        </th>
-                                                                        <th>Emission Account Confirmed</th>
-                                                                        <th style="width: 59px;"> Action
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody>
-                                                                    <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                        <td class="ft-16"><b> 1</b>
-                                                                        </td>
-                                                                        <td class="ft-16">Zahid</td>
-                                                                        <td class="ft-16">12-23-20023</td>
-                                                                        <td class="ft-16">Yes</td>
-                                                                        <td class="ft-16">
-                                                                            NO
-                                                                           
-                                                                        </td>
-                                                                        <td><i class="bi bi-caret-up-fill" aria-hidden="true"></i></td>
-
-                                                                    </tr>
-                                                                    <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                        <td class="ft-16"><b> 1</b>
-                                                                        </td>
-                                                                        <td class="ft-16">Zahid</td>
-                                                                        <td class="ft-16">12-23-20023</td>
-                                                                        <td class="ft-16">Yes</td>
-                                                                        <td class="ft-16">
-                                                                            NO
-                                                                           
-                                                                        </td>
-                                                                        <td><i class="bi bi-caret-up-fill" aria-hidden="true"></i></td>
-
-                                                                    </tr>
-                                                                    <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                        <td class="ft-16"><b> 1</b>
-                                                                        </td>
-                                                                        <td class="ft-16">Zahid</td>
-                                                                        <td class="ft-16">12-23-20023</td>
-                                                                        <td class="ft-16">Yes</td>
-                                                                        <td class="ft-16">
-                                                                            NO
-                                                                           
-                                                                        </td>
-                                                                        <td><i class="bi bi-caret-up-fill" aria-hidden="true"></i></td>
-
-                                                                    </tr>   
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end database table 1 -->
 </div>
 
 
+</div>
+</div>
+</div>
+</div>
+<div class="portlet-body form">
+    <div class="row">
+
+      <div class="col-md-12 mx-0">
+        <div>
+          <div class="form-group ">
+
+            <div class="left">
+              <div class="wrapper center-block">
+                <div class="left">
+                   <div class="col-md-12 mb-40 box-bd">
+
+                      <div class="col-md-8">
+                        <h4 class="">
+                          <strong>Emission List</strong>
+                      </h4>
+                  </div>
+              </div>
+              <div class="col-md-12 mb-40 box-bd">
+                  <div class="portlet-body filter-none">
+                    <div id="sample_5_wrapper" class="dataTables_wrapper">
+                      <div class="table Add">
+                         <div class="table-scrollable">
+                            <table class="collapse in table table-hover  order-column dataTable" id="sample_5" role="grid" aria-describedby="sample_5_info">
+
+                              <thead>
+                                <tr role="row " class="secondary_bg font-white">
+
+                                  <th style="">
+                                    SR.NO
+                                </th>
+                                <th style="">
+                                    Project Name
+                                </th>
+                                <th style=""> Detail
+                                </th>
+
+                                <th style="">Type
+                                </th>
+                                <th style="">
+                                    Attribute
+                                </th>
+                                <th style="">
+                                    Investment Amount
+                                </th>
+                                <th style="">
+                                    GHG Reduction Classification
+                                </th>
+                                <th style="">
+                                    End Use Energy Classification
+                                </th>
+                                <th style=""> Tested By
+                                </th>
+                                <th style=""> Emission Date
+                                </th>
+                                <th style=""> Api Implemented
+                                </th>
+                                <th style="">
+                                    Emission Amount Confirmed
+                                </th>
+                                <th style="">
+                                    Invoice EPC
+                                </th>
+                                <th style="">
+                                    Sign Off
+                                </th>
+                                <th style="">
+                                    API URL
+                                </th>
+                                <th style="">
+                                 Webcam URL
+                             </th>
+                             <!-- <th>Status</th> -->
+                             <th>Action</th>
+                         </tr>
+                     </thead>
+
+                     <tbody>
+                      @foreach($projects as $key=> $project)
+
+                      <tr class="gradeX odd" role="row">
+
+                        <td class="">{{($key+1)}}
+                        </td>
+                        <td class="">{{isset($project->name)?$project->name:''}}</td>
+                        <td class="">{{isset($project->detail)?$project->detail:''}}</td>
+                        <td class="">{{isset($project->type)?$project->type:''}}</td>
+                        <td class="">{{isset($project->attribute)?$project->attribute:''}}</td>
+                        <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:''}}{{isset($project->investment_amount)?$project->investment_amount:''}}</td>
+                        <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:''}}</td>
+                        <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):''}}</td>
+
+                        <td class="">{{isset($project->tested_by)?$project->tested_by:''}}</td>
+                        <td class="">{{isset($project->tested_date)?$project->tested_date:''}}</td>
+                        <td class="">{{isset($project->api_implemented)?$project->api_implemented:''}}</td>
+                        <td class="">
+                          {{isset($project->amount_confirm)?$project->amount_confirm:''}}
+                      </td>
 
 
+                      <td class=""> 
+                          @if(isset($project->invoice_epc))
+                          <a href="{{ asset('/uploads/project-doc/'.$project->invoice_epc)}}" target="_blank">Open file</a>
+                          @endif
+                      </td>
+                      <td class="">
+                       @if(isset($project->sign_off))
+                       <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
+                       @endif
+                   </td>
+                   <td class="">   
+                    @if(isset($project->api_url))                       
+                    <a href="{{isset($project->website_url)?$project->website_url:''}}" target="_blank">Visit API</a>
+                    @endif
+                </td>
+                <td class="">   
+                    @if(isset($project->webcam_url))                       
+                    <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Visit URL</a>
+                    @endif
+                </td>
+                <td class="">
+                 <a href="{{route('employee.investment',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
+                 </td>
+             </tr>
+             @endforeach
 
-
-{{--  <div class=" page-content-wrapper">
-
-    <div class="page-content hero2">
-        <div class="portlet light bordered " id="form_wizard_1">
-            <div class="portlet-body form">
-                <div class="row">
-
-                    <div class="col-md-12 mx-0">
-                        <div>
-                            <div class="form-group ">
-
-                                <div class="left">
-                                    <div class="wrapper center-block">
-                                        <div class="left">
-                                            <div class="col-md-12 mb-40 box-bd">
-                                                
-                                                <div class="col-md-8">
-                                                    <h4 class="">
-                                                      <strong> Emissions</strong> 
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-40 box-bd">
-                                                <div class="portlet-body filter-none">
-                                                    <div id="sample_5_wrapper" class="dataTables_wrapper">
-                                                        <div class="table Add">
-                                                                <div class="table-scrollable">
-                                                            <table class="table table-hover  order-column dataTable" role="grid"
-                                                            aria-describedby="sample_5_info">
-                                                            <thead>
-                                                                <tr
-                                                                    class="secondary_bg font-white">
-
-                                                                    <th 
-                                                                        style="width: 88px;">
-                                                                        #Amount of Emission
-                                                                    </th>
-                                                                    <th 
-                                                                        style="width: 88px;"> Total Emitted Volume
-                                                                    </th>
-
-                                                                    <th 
-                                                                        style="width: 59px;"> Available Emitted Volume
-                                                                    </th>
-                                                                    <th 
-                                                                        style="width: 59px;"> Interest remaining (total) (est.)
-                                                                    </th>
-                                                                    <th 
-                                                                        style="width: 59px;"> Remaining Share of Emitted Volume 
-                                                                    </th>
-                                                                    <th 
-                                                                        style="width: 59px;"> Time remaining (est.)  
-                                                                    </th>
-                                                                    <th 
-                                                                        style="width: 59px;"> 
-                                                                    </th>
-                                                                   
-
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <tr data-toggle="collapse" class="" data-target="#sample_5">
-
-                                                                    <td class="ft-16"><b> 3</b>
-                                                                    </td>
-                                                                    <td class="ft-16">10.000.000 €</td>
-                                                                    <td class="ft-16">3.500.000 €</td>
-                                                                    <td class="ft-16">175.000 €
-                                                                    </td>
-                                                                    <td class="ft-16">
-                                                                        35%</td>
-                                                                    <td class="ft-16">175 days</td>
-                                                                    <td class="ft-16">
-                                                                        <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            </tbody>
-                                                            </table>
-                                                                </div>
-                                                            <table  class="collapse in table table-hover  order-column dataTable"
-                                                                id="sample_5" role="grid"
-                                                                aria-describedby="sample_5_info">
-                                                              
-                                                                <thead>
-                                                                    <tr role="row "
-                                                                        class="secondary_bg font-white">
-
-                                                                        <th class="sorting_asc  "
-                                                                            tabindex="0"
-                                                                            aria-controls="sample_5"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-sort="ascending"
-                                                                            aria-label=" Auditor : activate to sort column descending"
-                                                                            style="width: 88px;">
-                                                                            #No. of Emission </th>
-                                                                        <th class="" tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" Name : activate to sort column ascending"
-                                                                            style="width: 88px;"> Your Total
-                                                                            Investment  </th>
-
-                                                                  
-                                                                        <th class="  " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Date of Emission 
-                                                                        </th>
-                                                                        <th class=" " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Project linked to Emission 
-                                                                        </th>
-                                                                       
-
-                                                                    </tr>
-                                                                </thead>
-
-                                                                <tbody>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 1</b>
-                                                                        </td>
-                                                                        <td class="ft-16">1.000.000 €</td>
-                                                                       
-                                                                        <td class="ft-16">
-                                                                            1/12/2023</td>
-                                                                        <td class="ft-16">Refinancing of 100kW PV Rooftop</td>
-                                                                       
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 2</b>
-                                                                        </td>
-                                                                        <td class="ft-16">4.000.000 €</td>
-                                                                       
-                                                                        <td class="ft-16">
-                                                                            2/11/2023</td>
-                                                                        <td class="ft-16">Financing of 300kW PV Rooftop </td>
-                                                                       
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 3</b>
-                                                                        </td>
-                                                                        <td class="ft-16">5.000.000 €</td>
-                                                                       
-                                                                        <td class="ft-16">
-                                                                            1/9/2023</td>
-                                                                        <td class="ft-16">....</td>
-                                                                       
-
-                                                                    </tr>
-                                                                
-                                            
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+         </tbody>
+     </table>
+ </div>
+</div>
+</div>
 </div>
 
-<div class="modal fade in" id="edit-fd" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog modal_width">
-        <div class="modal-content">
-            <div class="modal-header ">
-                <button type="button" class="close " data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Edit Details </h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-body">
-                    <div class="col-md-6">
-                        <label class="control-label "> Application ID
-                        </label>
-                        <input type="text" name="name1" placeholder="122222" disabled class="form-control pd-0_5" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="control-label "> Submitted On
-                        </label>
-                        <input type="text" name="name1" placeholder="Submitted On" class="form-control pd-0_5" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="control-label "> Status
-                        </label>
-                        <input type="text" name="name1" placeholder="Status" class="form-control pd-0_5" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="control-label "> Amount
-                        </label>
-                        <input type="text" name="name1" placeholder=" Amount " class="form-control pd-0_5" />
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="control-label ">Issued On
-                        </label>
-                        <input type="text" name="name1" placeholder="Date" class="form-control pd-0_5" />
-                    </div>
-
-
-
-                    <div class="form-actions col-md-12 float_center">
-                        <br>
-                        <a class="btn btn-primary" type="button">Edit</a>
-
-                        <a type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="modal-footer border-none">
-
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
-<div class="modal fade in" id="delete" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header ">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title ">Delete</h4>
-            </div>
-            <div class="modal-body"> Do you want to delete ? </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Yes</button>
-                <button type="button" class="btn btn-danger " data-dismiss="modal">No</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+
 </div>
-<div class="modal fade in" id="color" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog" style="width: 390px;">
-        <div class="modal-content">
-            <div class="modal-header ">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title ">Add your color theme....! </h4>
-            </div>
-            <div class="modal-body">
-                Select Color :
-                <input type="color" value="#006699">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Select</button>
-                <button type="button" class="btn btn-danger " data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>  --}}
+</div>
 
-     
-
-{{--  <script>
-    $('.panel-collapse').on('show.bs.collapse', function () {
-        $(this).siblings('.panel-heading').addClass('active');
-    });
-
-    $('.panel-collapse').on('hide.bs.collapse', function () {
-        $(this).siblings('.panel-heading').removeClass('active');
-    });
-</script>
+</div>
+</div>
 
 
-<script src="assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+</div>
+</div>
 
-<script>
-    $('.nav-item').on('click', function () {
-        $(this).find('.sub-menu').first().stop(true, true).delay(250).slideDown();
-    }, function () {
-        $(this).find('.sub-menu').first().stop(true, true).delay(200).slideUp()
-    });
-</script>  --}}
-  
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 @endsection

@@ -82,7 +82,7 @@
                                                                          Webcam URL
                                                                      </th>
                                                                      <th>Status</th>
-                                                                     <!-- <th>Action</th> -->
+                                                                     <th>Action</th>
                                                                  </tr>
                                                              </thead>
 
@@ -142,31 +142,31 @@
                                                             <a href="#"  class="btn btn-danger">Rejected</a>
                                                             @endif
                                                         </td>
-                                                      <!--   <td class="">
-                                                         <a href="{{route('admin.project.edit',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
-                                                            <a href="{{route('admin.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
-                                                        </td> -->
-                                                    </tr>
-                                                    @endforeach
+                                                        <td class="">
+                                                         <a href="{{route('employee.sale',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
+                                                            
+                                                         </td>
+                                                     </tr>
+                                                     @endforeach
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                 </tbody>
+                                             </table>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
 
-                        </div>
+                         </div>
 
-                    </div>
-                </div>
+                     </div>
+                 </div>
 
-            </div>
-        </div>
+             </div>
+         </div>
 
 
-    </div>
-</div>
+     </div>
+ </div>
 
 </div>
 <div class="col-md-12 mb-40 box-bd">

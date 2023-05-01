@@ -18,6 +18,7 @@ use App\Models\RegionClassification ;
 use App\Models\GHGReductionClassification;
 use App\Models\EUEnergyClassification;
 use App\Models\FAQ;
+use App\Models\EmployeeInvestment;
 
 class EmployeeController extends Controller
 {
@@ -47,12 +48,34 @@ class EmployeeController extends Controller
 
 		return view('Employee.overview');
 	}
-
-	public  function emission(){
-
-		return view('Employee.emission');
+	public function emission (){
+	     $projects = Project::where('status',4)->orderBy('id', 'desc')->get();
+	     return view('Employee.emission',compact('projects'));
+	}
+	public function investment($id)
+	{
+	    $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
+	    $projects = Project::where('status',4)->orderBy('id', 'desc')->get();
+	    $project_edit = Project::where('id',$id)->first();
+	    return view('Employee.emission',compact('projects','currencies','project_edit'));
 	}
 
+	public function add_investment(Request $request)
+	{
+		$request->validate([
+            'employee_investment_amount' => 'required',
+            'currency_id' => 'required',
+        ]);
+		// return $request->input();
+		// die();
+		$project = EmployeeInvestment::create([
+			'employee_id' => auth()->user()->id,
+			'project_id' => $request->id,
+	        'investment_amount' => $request->employee_investment_amount,
+	        'currency_id' => $request->currency_id,
+        ]);
+          return redirect()->back()->with('success', 'Investment created successfully!');
+	}
 	public  function transections(){
 
 		return view('Employee.transections');
@@ -69,7 +92,7 @@ class EmployeeController extends Controller
 	}
 
 	public  function project(){
-		$projects = Project::orderBy('id', 'desc')->get();
+		$projects = Project::where('status',4)->orderBy('id', 'desc')->get();
 		return view('Employee.project',compact('projects'));
 	}
 
@@ -96,6 +119,11 @@ class EmployeeController extends Controller
 	public  function faq(){
 		$faqs = FAQ::orderBy('id','desc')->get();
 		return view('Employee.faq',compact('faqs'));
+	}
+	public function sales($id)
+	{
+		//echo "string";
+		return redirect()->back();
 	}
 
 
