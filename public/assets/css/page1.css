@@ -1,0 +1,52 @@
+#col1 {
+    margin-top: 70px;
+}
+
+#divpd {
+    margin-top: 40px;
+}
+
+#icon {
+    margin-top: 85px;
+    font-size: 17px;
+    color: black;
+}
+
+#crdb {
+    color: green;
+    padding-top: 15px;
+}
+
+#crdr {
+    color: red;
+    padding-top: 15px;
+}
+
+#crdy {
+    color: yellow;
+    padding-top: 15px;
+}
+
+#cardb {
+    height: 80px;
+    border-radius: 15px;
+    border: 3px solid rgb(107, 206, 203);
+}
+
+#cardy {
+    height: 80px;
+    border-radius: 15px;
+    border: 3px solid yellow;
+}
+
+#cardr {
+    color: red;
+    height: 80px;
+    border-radius: 15px;
+    border: 3px solid red;
+}
+
+.smt {
+    color: white;
+    font-size: small;
+}
