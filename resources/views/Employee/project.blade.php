@@ -55,6 +55,9 @@
                                                                             Investment Amount
                                                                         </th>
                                                                         <th style="">
+                                                                          Your  Investment Amount
+                                                                        </th>
+                                                                        <th style="">
                                                                             GHG Reduction Classification
                                                                         </th>
                                                                         <th style="">
@@ -63,6 +66,8 @@
                                                                         <th style=""> Tested By
                                                                         </th>
                                                                         <th style=""> Emission Date
+                                                                        </th>
+                                                                        <th style=""> Investment  Date
                                                                         </th>
                                                                         <th style=""> Api Implemented
                                                                         </th>
@@ -81,8 +86,8 @@
                                                                         <th style="">
                                                                          Webcam URL
                                                                      </th>
-                                                                     <th>Status</th>
-                                                                     <th>Action</th>
+                                                                    <!--  <th>Status</th>
+                                                                     <th>Action</th> -->
                                                                  </tr>
                                                              </thead>
 
@@ -98,11 +103,15 @@
                                                                 <td class="">{{isset($project->type)?$project->type:''}}</td>
                                                                 <td class="">{{isset($project->attribute)?$project->attribute:''}}</td>
                                                                 <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:''}}{{isset($project->investment_amount)?$project->investment_amount:''}}</td>
+
+                                                                <td class="">{{isset($project->investment->currency->symbol)?$project->investment->currency->symbol:''}}{{isset($project->investment->investment_amount)?$project->investment->investment_amount:''}}</td>
+
                                                                 <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:''}}</td>
                                                                 <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):''}}</td>
 
                                                                 <td class="">{{isset($project->tested_by)?$project->tested_by:''}}</td>
                                                                 <td class="">{{isset($project->tested_date)?$project->tested_date:''}}</td>
+                                                                <td> {{isset($project->investment->created_at)?date('Y-m-d',strtotime($project->investment->created_at)):'';}}</td>
                                                                 <td class="">{{isset($project->api_implemented)?$project->api_implemented:''}}</td>
                                                                 <td class="">
                                                                   {{isset($project->amount_confirm)?$project->amount_confirm:''}}
@@ -129,7 +138,7 @@
                                                             <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Visit URL</a>
                                                             @endif
                                                         </td>
-                                                        <td>
+                                                       <!--  <td>
                                                             @if($project->status == 'Pending')                       
                                                             <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
                                                             @elseif($project->status == 'Reviewed') 
@@ -145,7 +154,7 @@
                                                         <td class="">
                                                          <a href="{{route('employee.sale',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
                                                             
-                                                         </td>
+                                                         </td> -->
                                                      </tr>
                                                      @endforeach
 

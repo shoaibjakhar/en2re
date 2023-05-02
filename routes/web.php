@@ -132,6 +132,7 @@ Route::group(['prefix'=>'employee/'],function(){
 	Route::get('/faq',[EmployeeController::class, 'faq'])->name('employee.faq');
 	Route::get('investment/{id}',[EmployeeController::class,'investment'])->name('employee.investment');
 	Route::post('/add-investment',[EmployeeController::class,'add_investment'])->name('employee.add-investment');
+	Route::post('/add-bank-detail',[EmployeeController::class,'add_bank_detail'])->name('employee.bank-detail');
 
 	
 	Route::get('sale/{id}',[EmployeeController::class,'sales'])->name('employee.sale');

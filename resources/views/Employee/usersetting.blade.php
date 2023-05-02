@@ -16,80 +16,87 @@
                                     <div class="wrapper center-block">
                                         <div class="left">
                                             <div class="col-md-12 mb-40 box-bd">
-                                         
-                                                <div class="col-md-12">
-                                                    <h4 class="">
-                                                      <strong> User Setting</strong> 
-                                                    </h4>
-                                                </div>
+                                                
+                                              @if ($errors->any())
+                                              <div class="alert-danger pl-40">
+                                                 <ol>
+                                                     @foreach ($errors->all() as $error)
+                                                     <li style="list-style-type:square !important">{{$error}}</li>
+                                                     @endforeach
+                                                 </ol>
+                                             </div>
+                                             @endif
+                                             @if (session('success'))
+                                             <div class="alert-success pl-40">
+                                                {{ session('success') }}
                                             </div>
-                                            <div class="col-md-12  justify-space-between">
-                                                <div class="col-md-5 mb-40 box-bd">
-                                                    <div class="portlet-body">
-                                                    <h4>Bank Information 
-                                                        <a class="pull-right" data-toggle="modal"
-                                                        href="#add"><i class="bi bi-gear-fill"></i>
-                                                        </a>
-                                                    </h4>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Bank Name
-                                                        </label>
-                                                          <input type="text" value="LOREM BANK" disabled class="form-control  " name="username1" />
-                                                          <span> <i class="bi bi-bank ic-pos3 new gold"></i></span>
-                                                      </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Account No #
-                                                        </label>
-                                                          <input type="password" value="###########" disabled class="form-control  " name="username1" />
-                                                          <span> <i class="bi bi-border-outer ic-pos3 new gold"></i></span>
-                                                      </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Bank ID #
-                                                        </label>
-                                                          <input type="password" value="###########" disabled class="form-control  " name="username1" />
-                                                          <span> <i class="bi bi-credit-card ic-pos3 new gold"></i></span>
-                                                      </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-5 mb-40 box-bd">
-                                                    <div class="portlet-body">
-                                                    <h4>Avatar setting 
-                                                        <a class="pull-right" data-toggle="modal"
-                                                        href="#addImg"><i class="bi bi-gear-fill"></i>
-                                                        </a>
-                                                    </h4>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Avatar name 
-                                                        </label>
-                                                          <input type="text" value="Robert Alderson" disabled class="form-control  " name="username1" />
-                                                          <span> <i class="bi bi-person-circle ic-pos3 new gold"></i></span>
-                                                      </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label left ">Picture
-                                                        </label>
-                                                          <img src="assets/img/preview.svg" class="block" width="100" alt="">
-                                                      </div>
-                                                    </div>
-
-                                                </div>
+                                            @endif
+                                            <div class="col-md-12">
+                                                <h4 class="">
+                                                  <strong> User Setting</strong> 
+                                              </h4>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-12  justify-space-between">
+                                        <div class="col-md-5 mb-40 box-bd">
+                                            <div class="portlet-body">
+                                                <h4 >Bank Information 
+                                                    <a class="pull-right" data-toggle="modal"
+                                                    href="#add"><i class="bi bi-gear-fill"></i>
+                                                </a>
+                                            </h4>
+                                            <div class="col-md-12">
+                                                <label class="control-label left ">Bank Name 
+                                                </label>
+                                                <input type="text" value="{{isset($bank_detail[0]->bank_name)? $bank_detail[0]->bank_name:'##########'}}"  class="form-control"  readonly />
+                                                <span> <i class="bi bi-bank ic-pos3 new gold"></i></span>
                                             </div>
+                                            <div class="col-md-12">
+                                                <label class="control-label left ">Account No #
+                                                </label>
+                                                <input type="password" value="{{isset($bank_detail[0]->account_no)? $bank_detail[0]->account_no:'##########'}}" readonly class="form-control " />
+                                                <span> <i class="bi bi-border-outer ic-pos3 new gold"></i></span>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="control-label left ">Bank ID #
+                                                </label>
+                                                <input type="password" value="{{isset($bank_detail[0]->bank_id)? $bank_detail[0]->account_no:'##########'}}"  class="form-control  " name="username1" readonly />
+                                                <span> <i class="bi bi-credit-card ic-pos3 new gold"></i></span>
+                                            </div>
+                                        </div>
 
-
-
+                                    </div>
+                                    <div class="col-md-5 mb-40 box-bd">
+                                        <div class="portlet-body">
+                                            <h4>Avatar setting 
+                                                <a class="pull-right" data-toggle="modal"
+                                                href="#addImg"><i class="bi bi-gear-fill"></i>
+                                            </a>
+                                        </h4>
+                                        <div class="col-md-12">
+                                            <label class="control-label left ">Avatar name 
+                                            </label>
+                                            <input type="text" value="Robert Alderson" disabled class="form-control  " name="username1" />
+                                            <span> <i class="bi bi-person-circle ic-pos3 new gold"></i></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="control-label left ">Picture
+                                            </label>
+                                            <img src="assets/img/preview.svg" class="block" width="100" alt="">
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 </main><!-- End #main -->
@@ -98,36 +105,43 @@
         <div class="modal-content">
             <div class="modal-header primary_bg font-white">
                 <button type="button" class="close " data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Bank Information</h4>
+                <h4 class="modal-title" style="color: white;">Bank Information</h4>
             </div>
             <div class="modal-body">
+                <form action="{{route('employee.bank-detail')}}" method="post">
+                    @csrf
                     <div class="portlet-body">
-                    <div class="col-md-12">
-                        <label class="control-label left ">Bank Name
-                        </label>
-                          <input type="text" placeholder="Name" class="form-control  " name="username1" />
-                          <span> <i class="bi bi-bank ic-pos3 new gold"></i></span>
-                      </div>
-                    <div class="col-md-12">
-                        <label class="control-label left ">Account No #
-                        </label>
-                          <input type="text" placeholder="###########" class="form-control  " name="username1" />
-                          <span> <i class="bi bi-border-outer ic-pos3 new gold"></i></span>
-                      </div>
-                    <div class="col-md-12">
-                        <label class="control-label left ">Bank ID #
-                        </label>
-                          <input type="text" placeholder="###########" class="form-control  " name="username1" />
-                          <span> <i class="bi bi-credit-card ic-pos3 new gold"></i></span>
-                      </div>
+                        <input type="hidden" name="id" value="{{isset($bank_detail[0]->id)?$bank_detail[0]->id:''}}">
+                        <div class="col-md-12">
+                            <label class="control-label left ">Bank Name*
+                            </label>
+                            <input type="text" placeholder="Name" value="{{isset($bank_detail[0]->bank_name)?$bank_detail[0]->bank_name:''}}" class="form-control  " name="bank_name" required />
+                            <span> <i class="bi bi-bank ic-pos3 new gold"></i></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label left ">Account No#*
+                            </label>
+                            <input type="text" placeholder="###########" value="{{isset($bank_detail[0]->account_no)?$bank_detail[0]->account_no:''}}" class="form-control  " name="account_no" required />
+                            <span> <i class="bi bi-border-outer ic-pos3 new gold"></i></span>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="control-label left ">Bank ID#*
+                            </label>
+                            <input type="text" placeholder="###########" value="{{isset($bank_detail[0]->bank_id)?$bank_detail[0]->bank_id:''}}" class="form-control  " name="bank_id" required />
+                            <span> <i class="bi bi-credit-card ic-pos3 new gold"></i></span>
+                        </div>
                     </div>
-                <div class="form-actions col-md-12 float_center">
-                    <br>
-                    <a class="btn btn-primary" type="button">Add</a>
+                    <div class="form-actions col-md-12 float_center">
+                        <br>
+                        @if(isset($bank_detail[0]->id))
+                        <button type="submit" class="btn btn-primary " style="margin-left: px;">Update</button>
+                        @else
+                        <button type="submit" class="btn btn-primary " style="margin-left: px;">Add</button>
+                        @endif
+                        <a type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
 
-                    <a type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-
-                </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer border-none">
 
@@ -145,21 +159,21 @@
                 <h4 class="modal-title">Avatar Setting </h4>
             </div>
             <div class="modal-body">
-                    <div class="portlet-body">
+                <div class="portlet-body">
                     <div class="col-md-12">
                         <label class="control-label left ">Avatar Name
                         </label>
-                          <input type="text" placeholder="Name" class="form-control  " name="username1" />
-                          <span> <i class="bi bi-person-fill ic-pos3 new gold"></i></span>
-                      </div>
-             
+                        <input type="text" placeholder="Name" class="form-control  " name="username1" />
+                        <span> <i class="bi bi-person-fill ic-pos3 new gold"></i></span>
+                    </div>
+                    
                     <div class="col-md-12">
                         <label class="control-label left ">Picture Upload
                         </label>
-                          <input type="file" class="form-control  " name="username1" />
-                          <span> <i class="bi bi-person-circle ic-pos3 new gold"></i></span>
-                      </div>
+                        <input type="file" class="form-control  " name="username1" />
+                        <span> <i class="bi bi-person-circle ic-pos3 new gold"></i></span>
                     </div>
+                </div>
                 <div class="form-actions col-md-12 float_center">
                     <br>
                     <a class="btn btn-primary" type="button">Add</a>

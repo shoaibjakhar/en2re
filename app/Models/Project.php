@@ -37,4 +37,9 @@ class Project extends Model
     {
         return $this->hasOne("App\Models\ProjectImage", "project_id","id");
     }
+
+    public function investment()
+    {
+        return $this->hasOne("App\Models\EmployeeInvestment", "project_id","id");
+    }
 }

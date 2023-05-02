@@ -16,4 +16,8 @@ class EmployeeInvestment extends Model
     	'investment_amount', 
     	'currency_id',
     ];
+    public function currency()
+    {
+        return $this->hasOne("App\Models\Currency", "id","currency_id");
+    }
 }
