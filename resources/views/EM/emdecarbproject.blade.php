@@ -159,27 +159,33 @@
                                                                 <td class="">
                                                                     {{($key+1)}}
                                                                 </td>
-                                                                <td class="">{{isset($ideation->name)?$ideation->name:''}}</td>
-                                                                <td class="">{{isset($ideation->details)?$ideation->details:''}}</td>
-                                                                <td class="">{{isset($ideation->type)?$ideation->type:''}}</td>
-                                                                <td class="">{{isset($ideation->attribute)?$ideation->attribute:''}}</td>
-                                                                <td class="">{{isset($ideation->GHGReduction->name)?$ideation->GHGReduction->name:''}}</td>
-                                                            <td class="">{{isset($ideation->EUEnergy->name)?ucfirst($ideation->EUEnergy->name):''}}</td>
-                                                                <td class="">{{isset($ideation->target_launch_date)?$ideation->target_launch_date:''}}</td>
-                                                                <td class="">{{isset($ideation->epc_responsibility_classification)?ucfirst($ideation->epc_responsibility_classification):''}}</td>
+                                                                <td class="">{{isset($ideation->name)?$ideation->name:'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->details)?$ideation->details:'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->type)?$ideation->type:'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->attribute)?$ideation->attribute:'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->GHGReduction->name)?$ideation->GHGReduction->name:'N/A'}}</td>
+                                                            <td class="">{{isset($ideation->EUEnergy->name)?ucfirst($ideation->EUEnergy->name):'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->target_launch_date)?$ideation->target_launch_date:'N/A'}}</td>
+                                                                <td class="">{{isset($ideation->epc_responsibility_classification)?ucfirst($ideation->epc_responsibility_classification):'N/A'}}</td>
                                                                 <td class=""> 
-                                                                    @if(isset($ideation->project_proposal))
+                                                                    @if(isset($ideation->project_proposal) && $ideation->project_proposal !='')
                                                                     <a href="{{ asset('/uploads/ideation-doc/'.$ideation->project_proposal)}}" target="_blank">Open file</a>
+                                                                    @else 
+                                                                    N/A
                                                                     @endif
                                                                 </td>
                                                                 <td class="">
-                                                                   @if(isset($ideation->feasibility_form))
+                                                                   @if(isset($ideation->feasibility_form) && $ideation->feasibility_form !='')
                                                                    <a href="{{ asset('/uploads/ideation-doc/'.$ideation->feasibility_form)}}" target="_blank">Download file</a>
+                                                                   @else
+                                                                   N/A
                                                                    @endif
                                                                </td>
                                                                <td class="">   
-                                                                @if(isset($ideation->business_case))
+                                                                @if(isset($ideation->business_case) && $ideation->business_case !='')
                                                                 <a href="{{ asset('/uploads/ideation-doc/'.$ideation->business_case)}}" target="_blank">Download file</a>
+                                                                @else
+                                                                N/A
                                                                 @endif
                                                             </td>
                                                             <td class="">

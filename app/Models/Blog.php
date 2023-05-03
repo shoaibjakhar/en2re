@@ -9,6 +9,7 @@ class Blog extends Model
 {
 	use HasFactory;
 	protected $fillable =[
+		'id',
 		'name', 
 		'header',
 		'launch_date', 
@@ -17,8 +18,8 @@ class Blog extends Model
 	];
 
 
-    public function blogImage()
+    public function blogImages()
     {
-        return $this->hasOne("App\Models\BlogImage", "blog_id","id");
+        return $this->hasOne("App\Models\BlogImage","blog_id","id");
     }
 }

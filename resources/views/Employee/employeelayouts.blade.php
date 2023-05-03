@@ -91,6 +91,28 @@
             infoDiv.innerHTML = html;
         }
     </script>
+    <style>
+        @media (min-width: 992px){
+            .col-lg-3 {
+                width: 23%!important;
+                margin: 10px;
+            }
+        }
+        .card-title{
+            height: 50px;
+            overflow: hidden;
+            display: -webkit-box;
+           -webkit-line-clamp: 2;
+           -webkit-box-orient: vertical;
+        }
+        .card-text{
+            /*height: 400px;*/
+            overflow: hidden;
+            display: -webkit-box;
+           -webkit-line-clamp: 5;
+           -webkit-box-orient: vertical;
+        }
+    </style>
 </head>
 
 <body>
@@ -137,153 +159,153 @@
 
                 <!-- END SIDEBAR TOGGLER BUTTON -->
                 <li class="nav-item secondary_bg font-white">
-                       <a href="#" class="nav-link nav-toggle" style="background: white;">
-                            <img src="{{ asset('./assets/img/preview.svg') }}" class="highlight4" id="profile" height="45" width="24" alt="">
-                            <span class="title head" style="font-size:large;color:black;"><b>{{auth()->user()->name}}</b></span>
-                        </a>
-                    <ul class="sub-menu ">
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/changepassword') }}" class="nav-link ">
-                                <span class="title">Change Password</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/usersetting') }}" class="nav-link ">
-                                <span class="title">User Setting</span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            {{--  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  --}}
-                                <a class="dropdown-item text-light" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-
-                        </li>
-                    </ul>
-
-                </li>
-                <li class="nav-item secondary_bg font-white">
-                    <a href="#" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item secondary_bg font-white">
-                    <a href="{{ url('employee/Overview') }}" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/overview.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">Overview</span>
-                    </a>
-                </li>
-                <li class="nav-item  secondary_bg font-white">
-                    <a href="#" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/portfolio.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">Portfolio
-                        </span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu new1">
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/emission') }}" class="nav-link ">
-                                <span class="title">Emissions
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/transections') }}" class="nav-link ">
-                                <span class="title">Transactions </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/interest') }}" class="nav-link ">
-                                <span class="title">Interest </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="nav-item  secondary_bg font-white">
-                    <a href="#" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/impact.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">Impact
-                        </span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu new1">
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/impact') }}" class="nav-link ">
-                                <span class="title">Impact
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/project') }}" class="nav-link ">
-                                <span class="title">Projects
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/roadmap') }}" class="nav-link ">
-                                <span class="title">Roadmap </span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="nav-item  secondary_bg font-white">
-                    <a href="#" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">Community
-                        </span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub-menu new1">
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/blog') }}" class="nav-link ">
-                                <span class="title">Blog/ Feed
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/ranking') }}" class="nav-link ">
-                                <span class="title">Ranking </span>
-                            </a>
-                        </li>
-                        <li class="nav-item  ">
-                            <a href="{{ url('employee/score') }}" class="nav-link ">
-                                <span class="title">Community Score </span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item secondary_bg font-white">
-                    <a href="{{ route('employee.faq') }}" class="nav-link nav-toggle">
-                        <img src="{{ asset('./assets/img/faq.svg') }}" class="highlight4" height="24" width="24" alt="">
-                        <span class="title head">FAQ</span>
-                    </a>
-                </li>
-                <li class="nav-item  secondary_bg font-white" >
-                    <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
+                 <a href="#" class="nav-link nav-toggle" style="background: white;">
+                    <img src="{{ asset('./assets/img/preview.svg') }}" class="highlight4" id="profile" height="45" width="24" alt="">
+                    <span class="title head" style="font-size:large;color:black;"><b>{{auth()->user()->name}}</b></span>
                 </a>
+                <ul class="sub-menu ">
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/changepassword') }}" class="nav-link ">
+                            <span class="title">Change Password</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/usersetting') }}" class="nav-link ">
+                            <span class="title">User Setting</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        {{--  <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">  --}}
+                            <a class="dropdown-item text-light" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
+                    </li>
+                </ul>
 
             </li>
-        </ul>
-        <!-- END SIDEBAR MENU -->
-        <!-- END SIDEBAR MENU -->
-    </div>
-    <!-- END SIDEBAR -->
+            <li class="nav-item secondary_bg font-white">
+                <a href="#" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item secondary_bg font-white">
+                <a href="{{ url('employee/Overview') }}" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/overview.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">Overview</span>
+                </a>
+            </li>
+            <li class="nav-item  secondary_bg font-white">
+                <a href="#" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/portfolio.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">Portfolio
+                    </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu new1">
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/emission') }}" class="nav-link ">
+                            <span class="title">Emissions
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/transections') }}" class="nav-link ">
+                            <span class="title">Transactions </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/interest') }}" class="nav-link ">
+                            <span class="title">Interest </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item  secondary_bg font-white">
+                <a href="#" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/impact.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">Impact
+                    </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu new1">
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/impact') }}" class="nav-link ">
+                            <span class="title">Impact
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/project') }}" class="nav-link ">
+                            <span class="title">Projects
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/roadmap') }}" class="nav-link ">
+                            <span class="title">Roadmap </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item  secondary_bg font-white">
+                <a href="#" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">Community
+                    </span>
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub-menu new1">
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/blog') }}" class="nav-link ">
+                            <span class="title">Blog/ Feed
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/ranking') }}" class="nav-link ">
+                            <span class="title">Ranking </span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a href="{{ url('employee/score') }}" class="nav-link ">
+                            <span class="title">Community Score </span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item secondary_bg font-white">
+                <a href="{{ route('employee.faq') }}" class="nav-link nav-toggle">
+                    <img src="{{ asset('./assets/img/faq.svg') }}" class="highlight4" height="24" width="24" alt="">
+                    <span class="title head">FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item  secondary_bg font-white" >
+                <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+
+        </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+</div>
+<!-- END SIDEBAR -->
 </div>
             <!-- <div class=" page-content-wrapper">
 

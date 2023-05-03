@@ -134,6 +134,7 @@ Route::group(['prefix'=>'employee/'],function(){
 	Route::post('/add-investment',[EmployeeController::class,'add_investment'])->name('employee.add-investment');
 	Route::post('/add-bank-detail',[EmployeeController::class,'add_bank_detail'])->name('employee.bank-detail');
 
+	Route::get('read-more/{id}',[EmployeeController::class,'blog_detail'])->name('employee.blog.detail');
 	
 	Route::get('sale/{id}',[EmployeeController::class,'sales'])->name('employee.sale');
 	

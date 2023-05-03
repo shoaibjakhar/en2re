@@ -199,45 +199,52 @@
 
                          <tbody>
                           @foreach($projects as $key=> $project)
-
                           <tr class="gradeX odd" role="row">
 
                             <td class="">{{($key+1)}}
                             </td>
-                            <td class="">{{isset($project->name)?$project->name:''}}</td>
-                            <td class="">{{isset($project->detail)?$project->detail:''}}</td>
-                            <td class="">{{isset($project->type)?$project->type:''}}</td>
-                            <td class="">{{isset($project->attribute)?$project->attribute:''}}</td>
-                            <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:''}}{{isset($project->investment_amount)?$project->investment_amount:''}}</td>
-                            <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:''}}</td>
-                            <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):''}}</td>
+                            <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
+                            <td class="">{{isset($project->detail)?$project->detail:'N/A'}}</td>
+                            <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
+                            <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>
+                            <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:'N/A'}}{{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
+                            <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:'N/A'}}</td>
+                            <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):'N/A'}}</td>
 
-                            <td class="">{{isset($project->tested_by)?$project->tested_by:''}}</td>
-                            <td class="">{{isset($project->tested_date)?$project->tested_date:''}}</td>
-                            <td class="">{{isset($project->api_implemented)?$project->api_implemented:''}}</td>
+                            <td class="">{{isset($project->tested_by)?$project->tested_by:'N/A'}}</td>
+                            <td class="">{{isset($project->tested_date)?$project->tested_date:'N/A'}}</td>
+                            <td class="">{{isset($project->api_implemented)?$project->api_implemented:'N/A'}}</td>
                             <td class="">
-                              {{isset($project->amount_confirm)?$project->amount_confirm:''}}
+                              {{isset($project->amount_confirm)?$project->amount_confirm:'N/A'}}
                             </td>
 
 
                             <td class=""> 
-                              @if(isset($project->invoice_epc))
+                              @if(isset($project->invoice_epc) && $project->invoice_epc !='')
                               <a href="{{ asset('/uploads/project-doc/'.$project->invoice_epc)}}" target="_blank">Open file</a>
+                              @else
+                              N/A
                               @endif
                             </td>
                             <td class="">
-                             @if(isset($project->sign_off))
+                             @if(isset($project->sign_off) && $project->sign_off !='')
                              <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
+                             @else
+                              N/A
                              @endif
                            </td>
                            <td class="">   
-                            @if(isset($project->api_url))                       
+                            @if(isset($project->api_url) && $project->api_url !='')                       
                             <a href="{{isset($project->website_url)?$project->website_url:''}}" target="_blank">Visit API</a>
+                            @else
+                              N/A
                             @endif
                           </td>
                           <td class="">   
-                            @if(isset($project->webcam_url))                       
+                            @if(isset($project->webcam_url) && $project->webcam_url !='')                       
                             <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Visit URL</a>
+                            @else
+                              N/A
                             @endif
                           </td>
                           <td>

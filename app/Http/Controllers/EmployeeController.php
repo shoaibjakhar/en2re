@@ -139,8 +139,13 @@ class EmployeeController extends Controller
 	}
 
 	public  function  blog(){
-
-		return view('Employee.blog');
+		$blogs= Blog::orderBy('id','desc')->get();
+		return view('Employee.blog',compact('blogs'));
+	}
+	public function blog_detail($id)
+	{
+		$blogs= Blog::where('id',$id)->get();
+		return view('Employee.blog-details',compact('blogs'));
 	}
 
 	public  function  ranking(){

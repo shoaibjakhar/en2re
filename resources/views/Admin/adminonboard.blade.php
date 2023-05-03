@@ -205,39 +205,47 @@
 
                                                                             <td class="">{{($key+1)}}
                                                                             </td>
-                                                                            <td class="">{{isset($customer->name)?$customer->name:''}}
+                                                                            <td class="">{{isset($customer->name)?$customer->name:'N/A'}}
                                                                             </td>
-                                                                            <td class="">{{isset($customer->email)?$customer->email:''}}</td>
-                                                                            <td class="">{{isset($customer->customerContactInfo->name)?$customer->customerContactInfo->name:''}}</td>
-                                                                            <td class="">{{isset($customer->customerContactInfo->phone)?$customer->customerContactInfo->phone:''}}
+                                                                            <td class="">{{isset($customer->email)?$customer->email:'N/A'}}</td>
+                                                                            <td class="">{{isset($customer->customerContactInfo->name)?$customer->customerContactInfo->name:'N/A'}}</td>
+                                                                            <td class="">{{isset($customer->customerContactInfo->phone)?$customer->customerContactInfo->phone:'N/A'}}
                                                                             </td>
                                                                             <td class="">
-                                                                                {{isset($customer->customerContactInfo->email)?$customer->customerContactInfo->email:''}}</td>
+                                                                                {{isset($customer->customerContactInfo->email)?$customer->customerContactInfo->email:'N/A'}}</td>
                                                                                 <td class="">
-                                                                                    @if(isset($customer->customer->website_url))
+                                                                                    @if(isset($customer->customer->website_url) && $customer->customer->website_url !='')
                                                                                     
                                                                                     <a href="{{isset($customer->customer->website_url)?$customer->customer->website_url:''}}" target="_blank">Visit Website</a>
+                                                                                    @else 
+                                                                                    N/A
                                                                                     @endif
                                                                                 </td>
 
                                                                                 <td class="">
-                                                                                    {{isset($customer->customer->regionName->name)?$customer->customer->regionName->name:''}}
+                                                                                    {{isset($customer->customer->regionName->name)?$customer->customer->regionName->name:'N/A'}}
                                                                                 </td>
-                                                                                <td class=""> {{isset($customer->customer->partner_classification)?ucfirst($customer->customer->partner_classification):''}}
+                                                                                <td class=""> {{isset($customer->customer->partner_classification)?ucfirst($customer->customer->partner_classification):'N/A'}}
                                                                                 </td>
                                                                                 <td class=""> 
-                                                                                    @if(isset($customer->customer->customer_contract))
+                                                                                    @if(isset($customer->customer->customer_contract) && $customer->customer->customer_contract !='')
                                                                                     <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_contract)}}" target="_blank">Open file</a>
+                                                                                     @else
+                                                                                    N/A
                                                                                     @endif
                                                                                 </td>
                                                                                 <td class=""> 
-                                                                                    @if(isset($customer->customer->customer_questionnaire))
+                                                                                    @if(isset($customer->customer->customer_questionnaire) && $customer->customer->customer_questionnaire !='')
                                                                                     <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_questionnaire)}}" target="_blank">Download file</a>
+                                                                                     @else
+                                                                                    N/A
                                                                                     @endif
                                                                                 </td>
                                                                                 <td class=""> 
-                                                                                    @if(isset($customer->customer->partner_questionnaire))
+                                                                                    @if(isset($customer->customer->partner_questionnaire) && $customer->customer->partner_questionnaire !='')
                                                                                     <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->partner_questionnaire)}}" target="_blank">Download file</a>
+                                                                                    @else
+                                                                                    N/A
                                                                                     @endif
                                                                                 </td>
                                                                                <!--  <td class=""> {{isset($customer->createdBy->name)?ucfirst($customer->createdBy->name):''}}
