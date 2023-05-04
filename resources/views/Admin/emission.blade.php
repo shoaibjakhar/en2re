@@ -204,10 +204,10 @@
                             <td class="">{{($key+1)}}
                             </td>
                             <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
-                            <td class="">{{isset($project->detail)?$project->detail:'N/A'}}</td>
+                            <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                             <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                             <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>
-                            <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:'N/A'}}{{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
+                            <td class="">${{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
                             <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:'N/A'}}</td>
                             <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):'N/A'}}</td>
 
@@ -235,7 +235,7 @@
                            </td>
                            <td class="">   
                             @if(isset($project->api_url) && $project->api_url !='')                       
-                            <a href="{{isset($project->website_url)?$project->website_url:''}}" target="_blank">Visit API</a>
+                            <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">Visit API</a>
                             @else
                               N/A
                             @endif

@@ -87,85 +87,18 @@
 
                                                                 <tbody>
                                                                     <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 5</b>
+                                                                        <td >{{isset($number_of_transection)? $number_of_transection:'N/A'}}</td>
+                                                                        <td >${{isset($totat_investment_amount)? $totat_investment_amount:'N/A'}}</td>
+                                                                        <td >N/A</td>
+                                                                        <td >N/A
                                                                         </td>
-                                                                        <td class="ft-16">100.000 €</td>
-                                                                        <td class="ft-16">0 €</td>
-                                                                        <td class="ft-16">5.000 €
-                                                                        </td>
-                                                                        <td class="ft-16">
-                                                                            12/2023</td>
-                                                                        <td class="ft-16">12,2200</td>
-                                                                       
-
+                                                                        <td >
+                                                                            N/A</td>
+                                                                        <td >N/A</td>
                                                                     </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 5</b>
-                                                                        </td>
-                                                                        <td class="ft-16">100.000 €</td>
-                                                                        <td class="ft-16">0 €</td>
-                                                                        <td class="ft-16">5.000 €
-                                                                        </td>
-                                                                        <td class="ft-16">
-                                                                            12/2023</td>
-                                                                        <td class="ft-16">12,2200</td>
-                                                                       
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 5</b>
-                                                                        </td>
-                                                                        <td class="ft-16">100.000 €</td>
-                                                                        <td class="ft-16">0 €</td>
-                                                                        <td class="ft-16">5.000 €
-                                                                        </td>
-                                                                        <td class="ft-16">
-                                                                            12/2023</td>
-                                                                        <td class="ft-16">12,2200</td>
-                                                                       
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 5</b>
-                                                                        </td>
-                                                                        <td class="ft-16">100.000 €</td>
-                                                                        <td class="ft-16">0 €</td>
-                                                                        <td class="ft-16">5.000 €
-                                                                        </td>
-                                                                        <td class="ft-16">
-                                                                            12/2023</td>
-                                                                        <td class="ft-16">12,2200</td>
-                                                                       
-
-                                                                    </tr>
-                                                                    <tr class="gradeX odd" role="row">
-
-                                                                        <td class="ft-16"><b> 5</b>
-                                                                        </td>
-                                                                        <td class="ft-16">100.000 €</td>
-                                                                        <td class="ft-16">0 €</td>
-                                                                        <td class="ft-16">5.000 €
-                                                                        </td>
-                                                                        <td class="ft-16">
-                                                                            12/2023</td>
-                                                                        <td class="ft-16">12,2200</td>
-                                                                       
-
-                                                                    </tr>
-                                                              
-                                                                 
-
-
-
                                                                 </tbody>
                                                             </table>
                                                         </div>
-
-
                                                     </div>
                                                 </div>
 

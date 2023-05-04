@@ -10,6 +10,7 @@ class Ideation extends Model
 	use HasFactory;
 
 	protected $table = 'ideations';
+	public $timestamps = false;
 
 	protected $fillable = [
 		'name',

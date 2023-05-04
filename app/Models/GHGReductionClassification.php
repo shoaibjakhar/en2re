@@ -9,6 +9,7 @@ class GHGReductionClassification extends Model
 {
     use HasFactory;
     protected $table ='ghg_reduction_classifications';
+    public $timestamps = false;
     protected $fillale = [
     	'id',
     	'name',

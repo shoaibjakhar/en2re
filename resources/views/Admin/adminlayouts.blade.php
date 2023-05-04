@@ -170,14 +170,14 @@
                             <span class="title head">Data Extraction</span>
                         </a>
                     </li>
-                    <li class="nav-item  secondary_bg font-white">
+                  <!--   <li class="nav-item  secondary_bg font-white">
                         <a href="{{ url('admin/blog') }}" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
                             <span class="title head">Blog/Feed</span>
                         </a>
-                    </li>
+                    </li> -->
                  
-                      <li class="nav-item  secondary_bg font-white">
+                    <!--   <li class="nav-item  secondary_bg font-white">
                         <a href="#" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/impact.svg') }}" class="highlight4" height="24" width="24" alt="">
                             <span class="title head">Settings</span>
@@ -200,7 +200,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="nav-item  secondary_bg font-white" >
                         <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

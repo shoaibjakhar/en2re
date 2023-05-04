@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
 	use HasFactory;
+	public $timestamps = false;
 	protected $fillable = [
 		'name',
 		'type', 
 		'attribute',
 		'launch_date',
 		'investment_amount',
-		'currency_id',
 		'detail', 
 		'ghg_reduction_classification', 
 		'end_use_energy_classification',
@@ -28,11 +28,6 @@ class Project extends Model
 		'latitude',
 		'longitude', 
 	];
-	public function currency()
-    {
-        return $this->hasOne("App\Models\Currency", "id","currency_id");
-    }
-
     public function projectImage()
     {
         return $this->hasOne("App\Models\ProjectImage", "project_id","id");

@@ -31,10 +31,10 @@ class EMController extends Controller
      public function decarbo(){
         $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
         $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
-        $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
+        // $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
         $projects = Project::orderBy('id', 'desc')->get();
 
-        return view('EM.emdecarbo',compact('projects','types','attributes','currencies'));
+        return view('EM.emdecarbo',compact('projects','types','attributes'));
      }
 
      public function decarboproject(){
@@ -81,7 +81,6 @@ public function add_project(Request $request)
         'end_use_energy_classification' => 'required',
         'launch_date' => 'required',
         'investment_amount' => 'required',
-        'currency_id' => 'required',
         'api_url' => 'required',
         'images' => 'required',
         'invoice_epc' => 'required',

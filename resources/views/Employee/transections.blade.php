@@ -93,7 +93,7 @@
                                                         @foreach($employee_investment as $key => $investment)
                                                         <tr class="gradeX odd" role="row">
                                                             <td>{{($key+1)}}</td>
-                                                            <td>{{isset($investment->currency->symbol)?$investment->currency->symbol:''}}{{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
+                                                            <td>${{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
                                                             <td> {{isset($investment->created_at)?date('Y-m-d',strtotime($investment->created_at)):'';}}</td>
                                                             <td>(pending) %</td>
                                                             <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>

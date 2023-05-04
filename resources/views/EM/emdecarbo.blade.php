@@ -18,17 +18,17 @@
 
                                             <div class="col-md-12  justify-space-between">
                                                 <div class="col-md-12 box-bd">
-                                                   @if ($errors->any())
-                                                   <div class="alert-danger pl-40">
-                                                       <ol>
-                                                           @foreach ($errors->all() as $error)
-                                                           <li style="list-style-type:square !important">{{$error}}</li>
-                                                           @endforeach
-                                                       </ol>
-                                                   </div>
-                                                   @endif
-                                                   @if (session('success'))
-                                                   <div class="alert-success pl-40">
+                                                 @if ($errors->any())
+                                                 <div class="alert-danger pl-40">
+                                                     <ol>
+                                                         @foreach ($errors->all() as $error)
+                                                         <li style="list-style-type:square !important">{{$error}}</li>
+                                                         @endforeach
+                                                     </ol>
+                                                 </div>
+                                                 @endif
+                                                 @if (session('success'))
+                                                 <div class="alert-success pl-40">
                                                     {{ session('success') }}
                                                 </div>
                                                 @endif
@@ -85,20 +85,8 @@
                                                             <input name="launch_date" class="form-control" type="date" value="<?php echo Date('Y-m-d')?>" required/>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <label class="control-label left ">Investment Amount* </label>
-                                                                    <input name="investment_amount" class="form-control" type="number" value="" required placeholder="0.00" />
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <label class="control-label left ">Currency*</label>
-                                                                    <select name="currency_id" id="" class="form-control" required>
-                                                                        @foreach($currencies as $currency)
-                                                                        <option value="{{$currency->id}}">{{ucfirst($currency->symbol)}}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                            </div>
+                                                            <label class="control-label left ">Investment Amount($)* </label>
+                                                            <input name="investment_amount" class="form-control" type="number" value="" required placeholder="$0.00" />
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Project Picture*</span></label>
@@ -157,7 +145,7 @@
                             <div class="left">
                                 <div class="wrapper center-block">
                                     <div class="left">
-                                       <div class="col-md-12 mb-40 box-bd">
+                                     <div class="col-md-12 mb-40 box-bd">
 
                                         <div class="col-md-8">
                                             <h4 class="">
@@ -217,28 +205,27 @@
                                                                         API URL
                                                                     </th>
                                                                     <th style="">
-                                                                       Webcam URL
-                                                                   </th>
-                                                                   <th>
-                                                                       Status
-                                                                   </th>
-                                                                   <th>Action</th>
+                                                                     Webcam URL
+                                                                 </th>
+                                                                 <th>
+                                                                     Status
+                                                                 </th>
+                                                                 <th>Action</th>
 
-                                                               </tr>
-                                                           </thead>
+                                                             </tr>
+                                                         </thead>
 
-                                                           <tbody>
+                                                         <tbody>
                                                             @foreach($projects as $key=> $project)
 
                                                             <tr>
-
                                                                 <td class="">{{($key+1)}}
                                                                 </td>
                                                                 <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
-                                                                <td class="">{{isset($project->detail)?$project->detail:'N/A'}}</td>
+                                                                <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                                                                 <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                                                                 <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>
-                                                                <td class="">{{isset($project->currency->symbol)?$project->currency->symbol:'N/A'}}{{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
+                                                                <td class="">${{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
                                                                 <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:'N/A'}}</td>
                                                                 <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):'N/A'}}</td>
                                                                 <td class="">{{isset($project->tested_by)?$project->tested_by:'N/A'}}</td>
@@ -255,17 +242,17 @@
                                                                     @endif
                                                                 </td>
                                                                 <td class="">
-                                                                 @if(isset($project->sign_off) && $project->sign_off !='')
-                                                                 <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
-                                                                  @else
-                                                                    N/A
-                                                                 @endif
-                                                             </td>
-                                                             <td class="">   
+                                                                   @if(isset($project->sign_off) && $project->sign_off !='')
+                                                                   <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
+                                                                   @else
+                                                                   N/A
+                                                                   @endif
+                                                               </td>
+                                                               <td class="">   
                                                                 @if(isset($project->api_url) && $project->api_url !='')                       
-                                                                <a href="{{isset($project->website_url)?$project->website_url:''}}" target="_blank">Visit API</a>
-                                                                 @else
-                                                                    N/A
+                                                                <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">Visit API</a>
+                                                                @else
+                                                                N/A
                                                                 @endif
                                                             </td>
                                                             <td class="">   
@@ -274,19 +261,19 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                               @if($project->status == 'Pending')                       
-                                                               <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
-                                                               @elseif($project->status == 'Reviewed') 
-                                                               <a href="{{route('em.project.approved.request',$project->id)}}"  class="btn btn-warning">Send Approved Request</a>
-                                                               @elseif($project->status == 'Approve request') 
-                                                               <a href="#"  class="btn btn-warning">Requested</a>
-                                                               @elseif($project->status == 'Approved') 
-                                                               <a href="#"  class="btn btn-success">Approved</a>
-                                                               @elseif($project->status == 'Rejected') 
-                                                               <a href="#"  class="btn btn-danger">Rejected</a>
-                                                               @endif
-                                                           </td>
-                                                           <td class="">
+                                                             @if($project->status == 'Pending')                       
+                                                             <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
+                                                             @elseif($project->status == 'Reviewed') 
+                                                             <a href="{{route('em.project.approved.request',$project->id)}}"  class="btn btn-warning">Send Approved Request</a>
+                                                             @elseif($project->status == 'Approve request') 
+                                                             <a href="#"  class="btn btn-warning">Requested</a>
+                                                             @elseif($project->status == 'Approved') 
+                                                             <a href="#"  class="btn btn-success">Approved</a>
+                                                             @elseif($project->status == 'Rejected') 
+                                                             <a href="#"  class="btn btn-danger">Rejected</a>
+                                                             @endif
+                                                         </td>
+                                                         <td class="">
                                                             <!-- <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a> -->
                                                             <a href="{{route('em.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
                                                         </td>

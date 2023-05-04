@@ -9,6 +9,7 @@ class CustomerContactInfo extends Model
 {
 	use HasFactory;
 	protected $table = 'customers_point_of_contacts';
+	public $timestamps = false;
 	protected $fillable =[
 		'user_id',
 		'name', 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RegionClassification extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table ='region_classifications';
     protected $fillale = [
     	'id',

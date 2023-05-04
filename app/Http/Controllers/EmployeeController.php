@@ -77,7 +77,10 @@ class EmployeeController extends Controller
 
 	public  function overview(){
 
-		return view('Employee.overview');
+		$employee_investment = EmployeeInvestment::where('employee_id',auth()->user()->id)->orderBy('id', 'desc')->get();
+		$number_of_transection = $employee_investment->count();
+		$totat_investment_amount = $employee_investment->sum('investment_amount');
+		return view('Employee.overview',compact('number_of_transection','totat_investment_amount'));
 	}
 	public function emission (){
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
@@ -86,17 +89,16 @@ class EmployeeController extends Controller
 	}
 	public function investment($id)
 	{
-		$currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
-		$projects = Project::where('status',4)->orderBy('id', 'desc')->get();
+		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
+		$projects = Project::where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
 		$project_edit = Project::where('id',$id)->first();
-		return view('Employee.emission',compact('projects','currencies','project_edit'));
+		return view('Employee.emission',compact('projects','project_edit'));
 	}
 
 	public function add_investment(Request $request)
 	{
 		$request->validate([
 			'employee_investment_amount' => 'required',
-			'currency_id' => 'required',
 		]);
 		// return $request->input();
 		// die();
@@ -104,7 +106,6 @@ class EmployeeController extends Controller
 			'employee_id' => auth()->user()->id,
 			'project_id' => $request->id,
 			'investment_amount' => $request->employee_investment_amount,
-			'currency_id' => $request->currency_id,
 		]);
 		return redirect()->back()->with('success', 'Investment created successfully!');
 	}

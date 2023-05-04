@@ -173,9 +173,8 @@ class AdminController extends Controller
    public function emission (){
      $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
      $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
-     $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
      $projects = Project::orderBy('id', 'desc')->get();
-     return view('Admin.emission',compact('projects','types','attributes','currencies'));
+     return view('Admin.emission',compact('projects','types','attributes'));
  }
  public function project (){
 
@@ -189,10 +188,10 @@ public function edit_project($id)
 {
     $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
     $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
-    $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
+    // $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
     $projects = Project::orderBy('id', 'desc')->get();
     $project_edit = Project::where('id',$id)->first();
-    return view('Admin.emission',compact('projects','types','attributes','currencies','project_edit'));
+    return view('Admin.emission',compact('projects','types','attributes','project_edit'));
 }
 public function add_project(Request $request)
 {

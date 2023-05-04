@@ -9,6 +9,7 @@ class BlogImage extends Model
 {
     use HasFactory;
     protected $table = "blog_images";
+    public $timestamps = false;
     protected $fillable =[
     	'image',
         'blog_id',];

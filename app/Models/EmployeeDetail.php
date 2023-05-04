@@ -9,6 +9,7 @@ class EmployeeDetail extends Model
 {
     use HasFactory;
     protected $table ='employee_detail';
+    public $timestamps = false;
     protected $fillable = [
     	'id', 
     	'employee_id',
