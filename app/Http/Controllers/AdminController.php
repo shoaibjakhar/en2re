@@ -17,6 +17,7 @@ use App\Models\CustomerContactInfo;
 use App\Models\RegionClassification ;
 use App\Models\GHGReductionClassification;
 use App\Models\EUEnergyClassification;
+use App\Models\EmployeeInvestment;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -28,8 +29,11 @@ class AdminController extends Controller
         $this->middleware('auth');
     }  
     public function dashboard(){
-
-        return view('Admin.admindashboard');
+        $employee_investment = EmployeeInvestment::all();
+        $totat_investment_amount = $employee_investment->sum('investment_amount');
+        $employees = EmployeeInvestment::groupBy('employee_id');
+        $total_invested_employee = $employees->count();
+        return view('Admin.admindashboard',compact('totat_investment_amount','total_invested_employee'));
     }
     public function onboard(){
         $customers = User::where('role_id',5)->orderBy('id', 'desc')->get();

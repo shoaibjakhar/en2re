@@ -76,7 +76,6 @@ class EmployeeController extends Controller
 	}
 
 	public  function overview(){
-
 		$employee_investment = EmployeeInvestment::where('employee_id',auth()->user()->id)->orderBy('id', 'desc')->get();
 		$number_of_transection = $employee_investment->count();
 		$totat_investment_amount = $employee_investment->sum('investment_amount');

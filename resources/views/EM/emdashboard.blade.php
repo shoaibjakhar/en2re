@@ -39,12 +39,12 @@
                 </div>
                 <!-- end icons -->
                 <div class="col-md-2">
-                    <h5>Revenue</h5>
+                    <h5>Investment</h5>
                     <h6>Absolute</h6>
                     <div class="card bg-dark text-center" id="cardb">
                         <div class="card-body">
                             <div class="card-text" id="crdb">
-                                782
+                                ${{isset($totat_investment_amount)? $totat_investment_amount:'0'}}
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@
                                         <i class="bx bx-chevron-up icon-close"></i></a>
                                     </div>
                                     <div id="faq-list-{{$faq->id}}" class="collapse " data-bs-parent=".faq-list">
-                                        <p>
+                                        <p style="color:white;">
                                          {{isset($faq->answer)?$faq->answer:''}}
                                      </p>
                                  </div>

@@ -7,6 +7,7 @@ use App\Models\Ideation;
 use App\Models\Currency;
 use App\Models\Project;
 use App\Models\ProjectImage;
+use App\Models\EmployeeInvestment;
 
 class EMController extends Controller
 {
@@ -24,8 +25,9 @@ class EMController extends Controller
      }
 
      public function dashboard(){
-    
-        return view('EM.emdashboard');
+        $employee_investment = EmployeeInvestment::all();
+        $totat_investment_amount = $employee_investment->sum('investment_amount');
+        return view('EM.emdashboard',compact('totat_investment_amount'));
      }
 
      public function decarbo(){

@@ -1,15 +1,15 @@
 @extends('Admin.adminlayouts')
 
 @section('content')
-   
+
 <div class=" page-content-wrapper">
     <div class="page-content hero2">
         <div class="container-fluid">
             <!-- start zubair -->
             <!-- row1 start -->
             <div class="row mt-5">
-                <div class="col-md-1" id="col1">
-                    <h4>Growth</h4>
+                <div class="col-md-1 pl-0" id="col1">
+                    <h5>Growth</h5>
                 </div>
                 <div class="col-md-2">
                     <h5>Customer growth</h5>
@@ -70,8 +70,8 @@
 
             <!-- row2 start -->
             <div class="row">
-                <div class="col-md-1" id="col1">
-                    <h4>Impact</h4>
+                <div class="col-md-1 pl-0" id="col1">
+                    <h5>Impact</h5>
                 </div>
                 <div class="col-md-2">
                     <h5>CO2 Reduction</h5>
@@ -102,12 +102,12 @@
                     </a>
                 </div>
                 <div class="col-md-2">
-                    <h5>Revenue</h5>
+                    <h5>Investment</h5>
                     <h6>Absolute</h6>
                     <div class="card bg-dark text-center" id="cardb">
                         <div class="card-body">
                             <div class="card-text" id="crdb">
-                                20 Mio
+                                ${{isset($totat_investment_amount)? $totat_investment_amount:'0'}}
                             </div>
                         </div>
                     </div>
@@ -132,26 +132,32 @@
 
             <!-- row3 start -->
             <div class="row">
-                <div class="col-md-1" id="col1">
-                    <h4>Community</h4>
+                <div class="col-md-1 pl-0" id="col1">
+                    <h5>Community</h5>
                 </div>
-                <div class="col-md-2">
-                    <h5>Employees (total)</h5>
-                    <h6>Absolute</h6>
-                    <div class="card bg-dark text-center" id="cardy">
-                        <div class="card-body">
-                            <div class="card-text" id="crdy">
-                                537
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Invested Employees(Total)</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Absolute</h6>
+                            <div class="card bg-dark text-center" id="cardy">
+                                <div class="card-body">
+                                    <div class="card-text" id="crdy">
+                                        {{isset($total_invested_employee)? $total_invested_employee:''}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <h6 id="divpd">Change rate last 12 month</h6>
-                    <div class="card bg-dark text-center" id="cardb">
-                        <div class="card-body">
-                            <div class="card-text" id="crdb">
-                                +23%
+                        <div class="col-md-6">
+                            <h6 id="">Change rate last 12 month</h6>
+                            <div class="card bg-dark text-center" id="cardb">
+                                <div class="card-body">
+                                    <div class="card-text" id="crdb">
+                                        +23%
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -163,23 +169,31 @@
                         <span class="glyphicon glyphicon-menu-down" style="font-size: 25px;color: black;"></span>
                     </a>
                 </div>
-                <div class="col-md-2">
-                    <h5>Revenue</h5>
-                    <h6>Absolute</h6>
-                    <div class="card bg-dark text-center" id="cardb">
-                        <div class="card-body">
-                            <div class="card-text" id="crdb">
-                                782
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>Investment per Employee</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Absolute</h6>
+                            <div class="card bg-dark text-center" id="cardy">
+                                <div class="card-body">
+                                    <div class="card-text" id="crdy">
+                                        @if(isset($totat_investment_amount) && isset($total_invested_employee) && $totat_investment_amount !=0 && $total_invested_employee !=0)
+                                        ${{$totat_investment_amount / $total_invested_employee}}
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <h6 id="divpd">Change rate last 12 month</h6>
-                    <div class="card bg-dark text-center" id="cardy">
-                        <div class="card-body">
-                            <div class="card-text" id="crdy">
-                                +5%
+                        <div class="col-md-6">
+                            <h6 id="">change rate last 3 month</h6>
+                            <div class="card bg-dark text-center" id="cardb">
+                                <div class="card-body">
+                                    <div class="card-text" id="crdb">
+                                        +5%
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
