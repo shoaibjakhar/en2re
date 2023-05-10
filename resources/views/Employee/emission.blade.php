@@ -19,7 +19,7 @@
                      <div class="wrapper center-block">
                       <div class="left">
                         <div class="col-md-12  justify-space-between">
-                          @if ($errors->any() || session('success') || isset($project_edit->id))
+                          @if ($errors->any() || session('success') ||session('error') || isset($project_edit->id))
                           <div class="col-md-12 mb-40 box-bd">
                             @if ($errors->any())
                             <div class="alert-danger pl-40">
@@ -33,6 +33,11 @@
                            @if (session('success'))
                            <div class="alert-success pl-40">
                              {{ session('success') }}
+                           </div>
+                           @endif
+                           @if (session('error'))
+                           <div class="alert-danger pl-40">
+                             {{ session('error') }}
                            </div>
                            @endif
                            @if(isset($project_edit->id))
@@ -53,7 +58,7 @@
                                 <input name="employee_investment_amount" class="form-control" type="number" min='0.5' step="0.1"  required placeholder="0.00" />
                               </div>                       
                               <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Pay</button>
+                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Add</button>
                               </div>
 
                             </div>
@@ -110,11 +115,9 @@
                                   SR.NO
                                 </th>
                                 <th style="">
-                                  Project Id
-                                </th>
-                                <th style="">
                                   Project Name
                                 </th>
+                                <th>Ideation</th>
                                 <th style=""> Detail
                                 </th>
 
@@ -165,9 +168,8 @@
 
                               <td class="">{{($key+1)}}
                               </td>
-                                <td class="">{{isset($project->id)?$project->id:'N/A'}}</td>
                               <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
-
+                              <td class="">{{isset($project->Ideation->name)?$project->Ideation->name:'N/A'}}</td>
                               <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                               <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                               <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>

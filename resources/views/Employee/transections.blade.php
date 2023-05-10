@@ -16,110 +16,113 @@
                                     <div class="wrapper center-block">
                                         <div class="left">
                                             <div class="col-md-12 mb-40 box-bd">
+                                              @if (session('success'))
+                                              <div class="alert-success pl-40">
+                                               {{ session('success') }}
+                                           </div>
+                                           @endif
+                                           <div class="col-md-8">
+                                            <h4 class="">
+                                              <strong> Transactions</strong> 
+                                          </h4>
+                                      </div>
+                                  </div>
 
-                                                <div class="col-md-8">
-                                                    <h4 class="">
-                                                      <strong> Transactions</strong> 
-                                                  </h4>
-                                              </div>
-                                          </div>
-
-                                          <div class="col-md-12 mb-40 box-bd">
-                                            <div class="portlet-body filter-none">
-                                                <div id="sample_5_wrapper" class="dataTables_wrapper">
-                                                    <div class="table Add">
-                                                        <div class="table-scrollable">
-                                                            <table class="table table-hover  order-column dataTable" role="grid"
-                                                            aria-describedby="sample_5_info">
-                                                            <thead>
-                                                                <tr class="secondary_bg font-white">
-
-                                                                    <th style="width: 88px;">
-                                                                        #Amount of Transactions
-                                                                    </th>
-                                                                    <th style="width: 88px;"> Your Total Investment
-                                                                    </th>
-
-                                                                    <th style="width: 59px;"> Deposit/ Withdraw Investment
-                                                                    </th>
-                                                                    <th style="width: 59px;"> Wallet access
-                                                                    </th>
-                                                                    <th style="width: 59px;">
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tbody>
-                                                                <tr >
-
-                                                                    <td > {{isset($number_of_transection)?$number_of_transection:0;}} </td>
-                                                                    <td >${{isset($totat_investment_amount)?$totat_investment_amount:0;}}</td>
-                                                                    <td >
-                                                                        <a data-toggle="modal"
-                                                                        href="#add"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                                        <a data-toggle="modal"
-                                                                        href="#sub"><i class="ml-20 fa fa-minus" aria-hidden="true"></i></a>
-                                                                    </td>
-                                                                    <td >
-
-                                                                        <a data-toggle="modal"
-                                                                        href="#"><i class="ml-20 bi bi-caret-right-fill" aria-hidden="true"></i></a>
-                                                                    </td>
-                                                                    <td  data-toggle="collapse" class="" data-target="#sample_5">
-                                                                        <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
-                                                                    </td>
-
-                                                                </tr>
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <table  class="collapse in table table-hover  order-column dataTable"
-                                                    id="sample_5" role="grid"
+                                  <div class="col-md-12 mb-40 box-bd">
+                                    <div class="portlet-body filter-none">
+                                        <div id="sample_5_wrapper" class="dataTables_wrapper">
+                                            <div class="table Add">
+                                                <div class="table-scrollable">
+                                                    <table class="table table-hover  order-column dataTable" role="grid"
                                                     aria-describedby="sample_5_info">
-
                                                     <thead>
-                                                        <tr role="row" class="secondary_bg font-white">
-                                                            <th>#No. of Transaction </th>
-                                                            <th>Project Id </th>
-                                                            <th>Your Total Investment  </th>
-                                                            <th>Date of Investment</th>
-                                                            <th>Interest Rate</th>
-                                                            <th>Genussrecht Vertrag</th>
-                                                            <th>Purchasing Contract</th>
-                                                            <th>Action</th>
+                                                        <tr class="secondary_bg font-white">
+
+                                                            <th style="width: 88px;">
+                                                                #Amount of Transactions
+                                                            </th>
+                                                            <th style="width: 88px;"> Your Total Investment
+                                                            </th>
+
+                                                            <th style="width: 59px;"> Deposit/ Withdraw Investment
+                                                            </th>
+                                                            <th style="width: 59px;"> Wallet access
+                                                            </th>
+                                                            <th style="width: 59px;">
+                                                            </th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @foreach($employee_investment as $key => $investment)
-                                                        <tr class="gradeX odd" role="row">
-                                                            <td>{{($key+1)}}</td>
-                                                            <td> {{isset($investment->project_id)? $investment->project_id:'';}}</td>
-                                                            <td>${{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
-                                                            <td> {{isset($investment->created_at)?date('Y-m-d',strtotime($investment->created_at)):'';}}</td>
-                                                            <td>(pending) %</td>
-                                                            <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
-                                                            <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
-                                                            <td class="">
-                                                                <a href="{{route('employee.project.detail',$investment->project_id)}}"> <i class="bi bi-eye-fill text-dark" aria-hidden="true" title="View details"></i>
-                                                               </td>
-                                                           </tr>
-                                                           @endforeach
-                                                       </tbody>
-                                                   </table>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                                                        <tr >
+
+                                                            <td > {{isset($number_of_transection)?$number_of_transection:0;}} </td>
+                                                            <td >${{isset($totat_investment_amount)?$totat_investment_amount:0;}}</td>
+                                                            <td >
+                                                                <a data-toggle="modal"
+                                                                href="#add"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                <a data-toggle="modal"
+                                                                href="#sub"><i class="ml-20 fa fa-minus" aria-hidden="true"></i></a>
+                                                            </td>
+                                                            <td >
+
+                                                                <a data-toggle="modal"
+                                                                href="#"><i class="ml-20 bi bi-caret-right-fill" aria-hidden="true"></i></a>
+                                                            </td>
+                                                            <td  data-toggle="collapse" class="" data-target="#sample_5">
+                                                                <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
+                                                            </td>
+
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <table  class="collapse in table table-hover  order-column dataTable"
+                                            id="sample_5" role="grid"
+                                            aria-describedby="sample_5_info">
+
+                                            <thead>
+                                                <tr role="row" class="secondary_bg font-white">
+                                                    <th>#No. of Transaction </th>
+                                                    <th>Project Name</th>
+                                                    <th>Ideation</th>
+                                                    <th>Your Total Investment  </th>
+                                                    <th>Payment Id</th>
+                                                    <th>Date of Investment</th>
+                                                    <th>Interest Rate</th>
+                                                    <th>Genussrecht Vertrag</th>
+                                                    <th>Purchasing Contract</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($employee_investment as $key => $investment)
+                                                <tr class="gradeX odd" role="row">
+                                                    <td>{{($key+1)}}</td>
+                                                    <td> {{isset($investment->project->name)? $investment->project->name:'';}}</td>
+                                                    <td> {{isset($investment->project->Ideation->name)? $investment->project->Ideation->name:'';}}</td>
+                                                    <td>${{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
+                                                    <td>{{isset($investment->payment_id)?$investment->payment_id:'N/A';}}</td>
+                                                    <td> {{isset($investment->created_at)?date('Y-m-d',strtotime($investment->created_at)):'';}}</td>
+                                                    <td>(pending) %</td>
+                                                    <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
+                                                    <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>

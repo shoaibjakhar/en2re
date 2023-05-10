@@ -43,4 +43,8 @@ class Project extends Model
     {
         return $this->hasOne("App\Models\User", "id","customer_id");
     }
+    public function ideation()
+    {
+        return $this->hasOne("App\Models\Ideation", "id","ideation_id");
+    }
 }

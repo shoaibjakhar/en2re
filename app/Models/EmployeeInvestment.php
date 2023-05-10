@@ -15,5 +15,11 @@ class EmployeeInvestment extends Model
     	'project_id', 
     	'employee_id', 
     	'investment_amount', 
+    	'payment_id',
     ];
+
+    public function project()
+    {
+        return $this->hasOne("App\Models\Project", "id","project_id");
+    }
 }

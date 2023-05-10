@@ -40,11 +40,11 @@
                                                                         <th style="">
                                                                             SR.NO
                                                                         </th>
-                                                                        <th>
-                                                                          Project Id
-                                                                        </th>
                                                                         <th style="">
                                                                             Project Name
+                                                                        </th>
+                                                                         <th style="">
+                                                                            Ideation
                                                                         </th>
                                                                         <th style=""> Detail
                                                                         </th>
@@ -101,8 +101,8 @@
 
                                                                 <td class="">{{($key+1)}}
                                                                 </td>
-                                                                <td class="">{{isset($project->id)?$project->id:'N/A'}}</td>
                                                                 <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
+                                                                <td class="">{{isset($project->Ideation->name)?$project->Ideation->name:'N/A'}}</td>
                                                                 <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                                                                 <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                                                                 <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>
@@ -120,8 +120,6 @@
                                                                 <td class="">
                                                                   {{isset($project->amount_confirm)?$project->amount_confirm:'N/A'}}
                                                               </td>
-
-
                                                               <td class=""> 
                                                                   @if(isset($project->invoice_epc) && $project->invoice_epc !='')
                                                                   <a href="{{ asset('/uploads/project-doc/'.$project->invoice_epc)}}" target="_blank">Open file</a>

@@ -141,8 +141,7 @@ Route::group(['prefix'=>'employee/'],function(){
 	Route::get('sale/{id}',[EmployeeController::class,'sales'])->name('employee.sale');
 
 	Route::post('/stripe',[EmployeeController::class,'stripe'])->name('employee.stripe');
-	Route::get('/payment-successfull',[EmployeeController::class,'payment_success'])->name('employee.payment-success');
-	
+	Route::get('/payment-successfull',[EmployeeController::class,'payment_success'])->name('employee.payment-success');	
 });
 
 Auth::routes();

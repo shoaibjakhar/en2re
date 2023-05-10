@@ -24,6 +24,16 @@ use DB;
 
 use Stripe\Stripe;
 use Stripe\Charge;
+use Stripe\Exception\CardException;
+
+// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
+DB::listen(function ($query) {
+    if (strpos($query->sql, 'employee_investment') !== false) {
+        Log::channel('table')->info($query->sql, ['bindings' => $query->bindings]);
+    }
+});
 
 class EmployeeController extends Controller
 {
@@ -100,7 +110,10 @@ class EmployeeController extends Controller
 		$request->validate([
 			'employee_investment_amount' => 'required|numeric|min:0.5',
 		]);
-		return view('Employee.confirm-payment',compact('request'));
+
+		$email = User::where('id',auth()->user()->id)->pluck('email');
+		$emp_email = $email[0]; 
+		return view('Employee.confirm-payment',compact('request','emp_email'));
 		//confirm-payment.blade.php
 		// $project = EmployeeInvestment::create([
 		// 	'employee_id' => auth()->user()->id,
@@ -114,27 +127,35 @@ class EmployeeController extends Controller
 	{
 		Stripe::setApiKey(env('STRIPE_SECRET'));
 
-		$charge = Charge::create([
-			'amount' =>100*$request->ammount,
-			'currency' => 'usd',
-			'source' => $request->stripeToken,
-			'description' => 'Test Payment'
-		]);
-		if($charge['paid']==1)
-		{
+		try {
+            // Call a Stripe API method that may throw an error
+			$charge = Charge::create([
+				'amount' =>100*$request->ammount,
+				'currency' => 'usd',
+				'source' => $request->stripeToken,
+				'description' => 'Test Payment'
+			]);
+             // Handle the successful response
+			echo "Charge succeeded: " . $charge->id;
 			$project = EmployeeInvestment::create([
 				'employee_id' => auth()->user()->id,
 				'project_id' => $request->project_id,
 				'investment_amount' => $request->ammount,
+				'payment_id' => $charge->id,
 			]);
-			return redirect()->route('employee.payment-success');
+			return redirect()->route('employee.transections')->with("success","You're transection done successfully!");
+
+		} catch (CardException $e) {
+            // Handle the card error
+			// echo "Stripe error: " . $e->getMessage();
+			return redirect()->route('employee.investment',$request->project_id)->with('error', $e->getMessage());
+
+		} catch (\Stripe\Exception\StripeException $e) {
+            // Handle the generic Stripe error
+            return redirect()->route('employee.investment',$request->project_id)->with('error', $e->getMessage());
+			// echo "Stripe error: " . $e->getMessage();
 		}
-		else
-		{
-			// return redirect()->route('employee.payment-success');
-			echo "payment request failed";
-		}
-		//return view('payment.success');
+
 	}
 
 	public function payment_success()
