@@ -81,11 +81,13 @@
                                                     <thead>
                                                         <tr role="row" class="secondary_bg font-white">
                                                             <th>#No. of Transaction </th>
+                                                            <th>Project Id </th>
                                                             <th>Your Total Investment  </th>
                                                             <th>Date of Investment</th>
                                                             <th>Interest Rate</th>
                                                             <th>Genussrecht Vertrag</th>
                                                             <th>Purchasing Contract</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
 
@@ -93,27 +95,31 @@
                                                         @foreach($employee_investment as $key => $investment)
                                                         <tr class="gradeX odd" role="row">
                                                             <td>{{($key+1)}}</td>
+                                                            <td> {{isset($investment->project_id)? $investment->project_id:'';}}</td>
                                                             <td>${{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
                                                             <td> {{isset($investment->created_at)?date('Y-m-d',strtotime($investment->created_at)):'';}}</td>
                                                             <td>(pending) %</td>
                                                             <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
                                                             <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                                            <td class="">
+                                                                <a href="{{route('employee.project.detail',$investment->project_id)}}"> <i class="bi bi-eye-fill text-dark" aria-hidden="true" title="View details"></i>
+                                                               </td>
+                                                           </tr>
+                                                           @endforeach
+                                                       </tbody>
+                                                   </table>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
 </div>
 </div>
 </div>

@@ -50,10 +50,10 @@
                               </div> 
                               <div class="col-md-6">
                                 <label class="control-label left ">Add Your Investment Amount($)* </label>
-                                <input name="employee_investment_amount" class="form-control" type="number" value="" required placeholder="0.00" />
+                                <input name="employee_investment_amount" class="form-control" type="number" min='0.5' step="0.1"  required placeholder="0.00" />
                               </div>                       
                               <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Add</button>
+                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Pay</button>
                               </div>
 
                             </div>
@@ -110,6 +110,9 @@
                                   SR.NO
                                 </th>
                                 <th style="">
+                                  Project Id
+                                </th>
+                                <th style="">
                                   Project Name
                                 </th>
                                 <th style=""> Detail
@@ -162,7 +165,9 @@
 
                               <td class="">{{($key+1)}}
                               </td>
+                                <td class="">{{isset($project->id)?$project->id:'N/A'}}</td>
                               <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
+
                               <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                               <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                               <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>

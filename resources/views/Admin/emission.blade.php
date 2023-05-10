@@ -151,6 +151,7 @@
                               <th style="">
                                 SR.NO
                               </th>
+                              <th>Customer Name</th>
                               <th style="">
                                 Project Name
                               </th>
@@ -203,6 +204,7 @@
 
                             <td class="">{{($key+1)}}
                             </td>
+                             <td class="">{{isset($project->customer->name)?$project->customer->name:'N/A'}}</td>
                             <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
                             <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                             <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>

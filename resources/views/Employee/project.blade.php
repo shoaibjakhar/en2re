@@ -37,8 +37,11 @@
                                                                       <thead>
                                                                         <tr role="row " class="secondary_bg font-white">
 
-                                                                          <th style="">
+                                                                        <th style="">
                                                                             SR.NO
+                                                                        </th>
+                                                                        <th>
+                                                                          Project Id
                                                                         </th>
                                                                         <th style="">
                                                                             Project Name
@@ -98,13 +101,14 @@
 
                                                                 <td class="">{{($key+1)}}
                                                                 </td>
+                                                                <td class="">{{isset($project->id)?$project->id:'N/A'}}</td>
                                                                 <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
                                                                 <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                                                                 <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
                                                                 <td class="">{{isset($project->attribute)?$project->attribute:'N/A'}}</td>
                                                                 <td class="">${{isset($project->investment_amount)?$project->investment_amount:'N/A'}}</td>
 
-                                                                <td class="">{{isset($project->investment->currency->symbol)?$project->investment->currency->symbol:'N/A'}}{{isset($project->investment->investment_amount)?$project->investment->investment_amount:'N/A'}}</td>
+                                                                <td class="">${{isset($project->investment->investment_amount)?$project->investment->investment_amount:'N/A'}}</td>
 
                                                                 <td class="">{{isset($project->ghg_reduction_classification)?$project->ghg_reduction_classification:'N/A'}}</td>
                                                                 <td class="">{{isset($project->end_use_energy_classification)?ucfirst($project->end_use_energy_classification):'N/A'}}</td>

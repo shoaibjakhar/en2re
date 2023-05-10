@@ -193,7 +193,7 @@ public function edit_project($id)
     $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
     $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
     // $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
-    $projects = Project::orderBy('id', 'desc')->get();
+    $projects = Project::where('id',$id)->get();
     $project_edit = Project::where('id',$id)->first();
     return view('Admin.emission',compact('projects','types','attributes','project_edit'));
 }

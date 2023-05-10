@@ -11,6 +11,8 @@ class Project extends Model
 	public $timestamps = false;
 	protected $fillable = [
 		'name',
+		'customer_id',
+        'ideation_id',
 		'type', 
 		'attribute',
 		'launch_date',
@@ -36,5 +38,9 @@ class Project extends Model
     public function investment()
     {
         return $this->hasOne("App\Models\EmployeeInvestment", "project_id","id");
+    }
+    public function customer()
+    {
+        return $this->hasOne("App\Models\User", "id","customer_id");
     }
 }

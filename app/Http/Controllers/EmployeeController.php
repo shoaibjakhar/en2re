@@ -22,6 +22,9 @@ use App\Models\EmployeeInvestment;
 use App\Models\EmployeeDetail;
 use DB;
 
+use Stripe\Stripe;
+use Stripe\Charge;
+
 class EmployeeController extends Controller
 {
 
@@ -29,8 +32,6 @@ class EmployeeController extends Controller
 	{
 		$this->middleware('auth');
 	}
-
-
 	public  function layout(){
 
 		return view('Employee.employeelayouts');
@@ -48,28 +49,28 @@ class EmployeeController extends Controller
 	}
 	public function add_bank_detail(Request $request)
 	{
-			$request->validate([
+		$request->validate([
 			'bank_name' => 'required|max:50',
 			'account_no' => 'required|max:50',
 			'bank_id' => 'required|max:50',
 		]);
 		if(isset($request->id) && $request->id !=" "){
 			$bank_detail =EmployeeDetail::find($request->id);
-		    $bank_detail->bank_name  = $request->bank_name;
-		    $bank_detail->account_no  = $request->account_no;
-		    $bank_detail->bank_id  = $request->bank_id;
-		    $bank_detail->save();
-		    return redirect()->back()->with('success', 'Bank detail updated successfully!');
+			$bank_detail->bank_name  = $request->bank_name;
+			$bank_detail->account_no  = $request->account_no;
+			$bank_detail->bank_id  = $request->bank_id;
+			$bank_detail->save();
+			return redirect()->back()->with('success', 'Bank detail updated successfully!');
 		}
 		else 
 		{
-		    $project = EmployeeDetail::create([
+			$project = EmployeeDetail::create([
 				'employee_id' => auth()->user()->id,
 				'bank_name' => $request->bank_name,
 				'account_no' => $request->account_no,
-			  	'bank_id' => $request->bank_id,
-		    ]);
-		    return redirect()->back()->with('success', 'Bank detail add successfully!');
+				'bank_id' => $request->bank_id,
+			]);
+			return redirect()->back()->with('success', 'Bank detail add successfully!');
 		}
 
 
@@ -89,7 +90,7 @@ class EmployeeController extends Controller
 	public function investment($id)
 	{
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
-		$projects = Project::where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
+		$projects = Project::where('id',$id)->where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
 		$project_edit = Project::where('id',$id)->first();
 		return view('Employee.emission',compact('projects','project_edit'));
 	}
@@ -97,16 +98,48 @@ class EmployeeController extends Controller
 	public function add_investment(Request $request)
 	{
 		$request->validate([
-			'employee_investment_amount' => 'required',
+			'employee_investment_amount' => 'required|numeric|min:0.5',
 		]);
-		// return $request->input();
-		// die();
-		$project = EmployeeInvestment::create([
-			'employee_id' => auth()->user()->id,
-			'project_id' => $request->id,
-			'investment_amount' => $request->employee_investment_amount,
+		return view('Employee.confirm-payment',compact('request'));
+		//confirm-payment.blade.php
+		// $project = EmployeeInvestment::create([
+		// 	'employee_id' => auth()->user()->id,
+		// 	'project_id' => $request->id,
+		// 	'investment_amount' => $request->employee_investment_amount,
+		// ]);
+
+		// return redirect()->route('employee.transections')->with('success', 'Investment created successfully!');
+	}
+	public function stripe(Request $request)
+	{
+		Stripe::setApiKey(env('STRIPE_SECRET'));
+
+		$charge = Charge::create([
+			'amount' =>100*$request->ammount,
+			'currency' => 'usd',
+			'source' => $request->stripeToken,
+			'description' => 'Test Payment'
 		]);
-		return redirect()->back()->with('success', 'Investment created successfully!');
+		if($charge['paid']==1)
+		{
+			$project = EmployeeInvestment::create([
+				'employee_id' => auth()->user()->id,
+				'project_id' => $request->project_id,
+				'investment_amount' => $request->ammount,
+			]);
+			return redirect()->route('employee.payment-success');
+		}
+		else
+		{
+			// return redirect()->route('employee.payment-success');
+			echo "payment request failed";
+		}
+		//return view('payment.success');
+	}
+
+	public function payment_success()
+	{
+		return view('Employee.payment-success');
 	}
 	public  function transections(){
 
@@ -130,6 +163,11 @@ class EmployeeController extends Controller
 	public  function project(){
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
 		$projects = Project::where('status',4)->whereIn('id',$already_invested)->orderBy('id', 'desc')->get();
+		return view('Employee.project',compact('projects'));
+	}
+	public function project_detail($id)
+	{
+		$projects = Project::where('id',$id)->get();
 		return view('Employee.project',compact('projects'));
 	}
 

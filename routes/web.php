@@ -21,7 +21,8 @@ Route::get('/', function () {
 	return view('auth.login');
 });
 
-
+// Route::get('payment',[PaymentController::class,'show']);
+// Route::get('payment',[PaymentController::class,'charge']);
 // <-----ADMIN ROUTE----->
 Route::group(['prefix'=>'admin/'],function(){
 	Route::get('/dashboard',[AdminController::class,'dashboard']);
@@ -121,10 +122,11 @@ Route::group(['prefix'=>'employee/'],function(){
 	Route::get('/usersetting',[EmployeeController::class,'usersetting']);
 	
 	Route::get('/emission',[EmployeeController::class,'emission']);
-	Route::get('/transections',[EmployeeController::class,'transections']);
+	Route::get('/transections',[EmployeeController::class,'transections'])->name('employee.transections');
 	Route::get('/interest',[EmployeeController::class,'interest']);
 	Route::get('/impact',[EmployeeController::class, 'impact']);
 	Route::get('/project',[EmployeeController::class, 'project']);
+	Route::get('/project/{id}',[EmployeeController::class, 'project_detail'])->name('employee.project.detail');
 	Route::get('/roadmap',[EmployeeController::class, 'roadmap']);
 	Route::get('/blog',[EmployeeController::class, 'blog']);
 	Route::get('/ranking',[EmployeeController::class, 'ranking']);
@@ -137,6 +139,9 @@ Route::group(['prefix'=>'employee/'],function(){
 	Route::get('read-more/{id}',[EmployeeController::class,'blog_detail'])->name('employee.blog.detail');
 	
 	Route::get('sale/{id}',[EmployeeController::class,'sales'])->name('employee.sale');
+
+	Route::post('/stripe',[EmployeeController::class,'stripe'])->name('employee.stripe');
+	Route::get('/payment-successfull',[EmployeeController::class,'payment_success'])->name('employee.payment-success');
 	
 });
 

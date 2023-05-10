@@ -18,17 +18,17 @@
 
                                             <div class="col-md-12  justify-space-between">
                                                 <div class="col-md-12 box-bd">
-                                                 @if ($errors->any())
-                                                 <div class="alert-danger pl-40">
-                                                     <ol>
-                                                         @foreach ($errors->all() as $error)
-                                                         <li style="list-style-type:square !important">{{$error}}</li>
-                                                         @endforeach
-                                                     </ol>
-                                                 </div>
-                                                 @endif
-                                                 @if (session('success'))
-                                                 <div class="alert-success pl-40">
+                                                   @if ($errors->any())
+                                                   <div class="alert-danger pl-40">
+                                                       <ol>
+                                                           @foreach ($errors->all() as $error)
+                                                           <li style="list-style-type:square !important">{{$error}}</li>
+                                                           @endforeach
+                                                       </ol>
+                                                   </div>
+                                                   @endif
+                                                   @if (session('success'))
+                                                   <div class="alert-success pl-40">
                                                     {{ session('success') }}
                                                 </div>
                                                 @endif
@@ -40,11 +40,28 @@
                                                             <label class="control-label left ">Project Name*</label>
                                                             <input type="text" value="{{old('name')}}" class="form-control" name="name" required />
                                                         </div>
+                                                           <div class="col-md-6">
+                                                            <label class="control-label left ">Customer*</label>
+                                                            <select name="customer_id" id="" class="form-control" required>
+                                                                @foreach($customers as $customer)
+                                                                <option value="{{$customer->id}}">{{ucfirst($customer->name)}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Detail* </label>
                                                             <input type="text" value="{{old('details')}}" class="form-control" name="details" required />
                                                         </div>
+
                                                         <div class="col-md-6">
+                                                            <label class="control-label left ">Ideation*</label>
+                                                            <select name="ideation_id" id="" class="form-control" required>
+                                                                @foreach($ideations as $ideation)
+                                                                <option value="{{$ideation->id}}">{{ucfirst($ideation->name)}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                          <div class="col-md-6">
                                                             <label class="control-label left ">Type*</label>
                                                             <select name="type" id="" class="form-control" required>
                                                                 @foreach($types as $type)
@@ -145,7 +162,7 @@
                             <div class="left">
                                 <div class="wrapper center-block">
                                     <div class="left">
-                                     <div class="col-md-12 mb-40 box-bd">
+                                       <div class="col-md-12 mb-40 box-bd">
 
                                         <div class="col-md-8">
                                             <h4 class="">
@@ -165,6 +182,9 @@
 
                                                                     <th style="">
                                                                         SR.NO
+                                                                    </th>
+                                                                     <th style="">
+                                                                        Customer Name
                                                                     </th>
                                                                     <th style="">
                                                                         Project Name
@@ -205,22 +225,23 @@
                                                                         API URL
                                                                     </th>
                                                                     <th style="">
-                                                                     Webcam URL
-                                                                 </th>
-                                                                 <th>
-                                                                     Status
-                                                                 </th>
-                                                                 <th>Action</th>
+                                                                       Webcam URL
+                                                                   </th>
+                                                                   <th>
+                                                                       Status
+                                                                   </th>
+                                                                   <th>Action</th>
 
-                                                             </tr>
-                                                         </thead>
+                                                               </tr>
+                                                           </thead>
 
-                                                         <tbody>
+                                                           <tbody>
                                                             @foreach($projects as $key=> $project)
 
                                                             <tr>
                                                                 <td class="">{{($key+1)}}
                                                                 </td>
+                                                                <td class="">{{isset($project->customer->name)?$project->customer->name:'N/A'}}</td>
                                                                 <td class="">{{isset($project->name)?$project->name:'N/A'}}</td>
                                                                 <td class="">{{isset($project->detail)? substr($project->detail,0,20).'...':'N/A'}}</td>
                                                                 <td class="">{{isset($project->type)?$project->type:'N/A'}}</td>
@@ -242,13 +263,13 @@
                                                                     @endif
                                                                 </td>
                                                                 <td class="">
-                                                                   @if(isset($project->sign_off) && $project->sign_off !='')
-                                                                   <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
-                                                                   @else
-                                                                   N/A
-                                                                   @endif
-                                                               </td>
-                                                               <td class="">   
+                                                                 @if(isset($project->sign_off) && $project->sign_off !='')
+                                                                 <a href="{{ asset('/uploads/project-doc/'.$project->sign_off)}}" target="_blank">Open file</a>
+                                                                 @else
+                                                                 N/A
+                                                                 @endif
+                                                             </td>
+                                                             <td class="">   
                                                                 @if(isset($project->api_url) && $project->api_url !='')                       
                                                                 <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">Visit API</a>
                                                                 @else
@@ -261,19 +282,19 @@
                                                                 @endif
                                                             </td>
                                                             <td>
-                                                             @if($project->status == 'Pending')                       
-                                                             <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
-                                                             @elseif($project->status == 'Reviewed') 
-                                                             <a href="{{route('em.project.approved.request',$project->id)}}"  class="btn btn-warning">Send Approved Request</a>
-                                                             @elseif($project->status == 'Approve request') 
-                                                             <a href="#"  class="btn btn-warning">Requested</a>
-                                                             @elseif($project->status == 'Approved') 
-                                                             <a href="#"  class="btn btn-success">Approved</a>
-                                                             @elseif($project->status == 'Rejected') 
-                                                             <a href="#"  class="btn btn-danger">Rejected</a>
-                                                             @endif
-                                                         </td>
-                                                         <td class="">
+                                                               @if($project->status == 'Pending')                       
+                                                               <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
+                                                               @elseif($project->status == 'Reviewed') 
+                                                               <a href="{{route('em.project.approved.request',$project->id)}}"  class="btn btn-warning">Send Approved Request</a>
+                                                               @elseif($project->status == 'Approve request') 
+                                                               <a href="#"  class="btn btn-warning">Requested</a>
+                                                               @elseif($project->status == 'Approved') 
+                                                               <a href="#"  class="btn btn-success">Approved</a>
+                                                               @elseif($project->status == 'Rejected') 
+                                                               <a href="#"  class="btn btn-danger">Rejected</a>
+                                                               @endif
+                                                           </td>
+                                                           <td class="">
                                                             <!-- <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a> -->
                                                             <a href="{{route('em.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
                                                         </td>

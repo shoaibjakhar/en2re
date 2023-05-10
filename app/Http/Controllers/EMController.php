@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Models\Project;
 use App\Models\ProjectImage;
 use App\Models\EmployeeInvestment;
+use App\Models\User;
 
 class EMController extends Controller
 {
@@ -31,12 +32,14 @@ class EMController extends Controller
      }
 
      public function decarbo(){
+        $customers = User::where('role_id',5)->orderBy('name', 'asc')->get();
         $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
+        $ideations = Ideation::select('id','name')->orderBy('name', 'asc')->get();
         $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
         // $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
         $projects = Project::orderBy('id', 'desc')->get();
 
-        return view('EM.emdecarbo',compact('projects','types','attributes'));
+        return view('EM.emdecarbo',compact('projects','types','attributes','customers','ideations'));
      }
 
      public function decarboproject(){
@@ -47,8 +50,7 @@ class EMController extends Controller
      {
       
         $ideation_edit =Ideation::where('id',$id)->first();
-       // return $ideation_edit;
-        $ideations = Ideation::orderBy('id', 'desc')->get();
+        $ideations = Ideation::where('id',$id)->get();
         return view('EM.emdecarbproject',compact('ideations','ideation_edit'));
      }
      public function update_ideation(Request $request)
@@ -87,6 +89,8 @@ public function add_project(Request $request)
         'images' => 'required',
         'invoice_epc' => 'required',
         'sign_off' => 'required',
+        'customer_id' => 'required',
+        'ideation_id' => 'required',
     ]);
 
     $invoice_epc ='';
@@ -103,6 +107,8 @@ public function add_project(Request $request)
     }
     $project = Project::create([
         'name' => $request->name,
+        'customer_id' => $request->customer_id,
+        'ideation_id' => $request->ideation_id,
         'detail' => $request->details,
         'type' => $request->type,
         'attribute' => $request->i_attributes,
