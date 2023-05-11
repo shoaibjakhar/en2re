@@ -29,11 +29,11 @@ use Stripe\Exception\CardException;
 // use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-DB::listen(function ($query) {
-    if (strpos($query->sql, 'employee_investment') !== false) {
-        Log::channel('table')->info($query->sql, ['bindings' => $query->bindings]);
-    }
-});
+// DB::listen(function ($query) {
+//     if (strpos($query->sql, 'employee_investment') !== false) {
+//         Log::channel('table')->info($query->sql, ['bindings' => $query->bindings]);
+//     }
+// });
 
 class EmployeeController extends Controller
 {
@@ -93,8 +93,10 @@ class EmployeeController extends Controller
 		return view('Employee.overview',compact('number_of_transection','totat_investment_amount'));
 	}
 	public function emission (){
+	
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
 		$projects = Project::where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
+
 		return view('Employee.emission',compact('projects'));
 	}
 	public function investment($id)
@@ -114,14 +116,6 @@ class EmployeeController extends Controller
 		$email = User::where('id',auth()->user()->id)->pluck('email');
 		$emp_email = $email[0]; 
 		return view('Employee.confirm-payment',compact('request','emp_email'));
-		//confirm-payment.blade.php
-		// $project = EmployeeInvestment::create([
-		// 	'employee_id' => auth()->user()->id,
-		// 	'project_id' => $request->id,
-		// 	'investment_amount' => $request->employee_investment_amount,
-		// ]);
-
-		// return redirect()->route('employee.transections')->with('success', 'Investment created successfully!');
 	}
 	public function stripe(Request $request)
 	{
@@ -136,13 +130,18 @@ class EmployeeController extends Controller
 				'description' => 'Test Payment'
 			]);
              // Handle the successful response
-			echo "Charge succeeded: " . $charge->id;
+			//echo "Charge succeeded: " . $charge->id;
+			DB::enableQueryLog();
 			$project = EmployeeInvestment::create([
 				'employee_id' => auth()->user()->id,
 				'project_id' => $request->project_id,
 				'investment_amount' => $request->ammount,
 				'payment_id' => $charge->id,
 			]);
+
+			$queryLog = DB::getQueryLog();
+            Log::info('Query Log:', $queryLog);
+
 			return redirect()->route('employee.transections')->with("success","You're transection done successfully!");
 
 		} catch (CardException $e) {
