@@ -47,7 +47,11 @@
     <link href="{{ asset('assets/css/page1.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/_start/simple.css') }}" rel="stylesheet" type="text/css" />
     <!-- =======================================================-->
-
+    <style>
+        #company_name{
+            padding-top: 10px!important;
+        }
+    </style>
 </head>
 
 <body>
@@ -73,125 +77,129 @@
 
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="{{route('dashboard')}}" class="logo me-auto login mr-0"><img src="{{ asset('assets/img/EN2RE_LOGO.png') }}" alt="" class="img-fluid filter-bg"></a>
+          <a href="#{{route('dashboard')}}" class="logo me-auto login" id="company_name">
+            @php
+            $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
 
-
-        </div>
-        <!-- END LOGO -->
-
-    </header>
-    <!-- End Header -->
-    <div class="clearfix" style="background:#222a35;"> </div>
-    <section class="section-pad section_pad_bt s992_pad">
-        <div class="page-sidebar-wrapper ">
-
-            <div class="page-sidebar navbar-collapse collapse">
-
-                <ul class="page-sidebar-menu page-sidebar-menu-light " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 6px">
-                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                    <li class="nav-item secondary_bg">
-                        <a href="#" class="nav-link nav-toggle" style="background: white;">
-                            <img src="{{ asset('./assets/img/preview.svg') }}" class="highlight4" id="profile" height="45" width="24" alt="">
-                            <span class="title head" style="font-size:large;color:black;"><b><b>{{auth()->user()->name}}</b></b></span>
-                        </a>
-                    </li>
-                    <!-- END SIDEBAR TOGGLER BUTTON -->
-                    <li class="nav-item secondary_bg font-white">
-                        <a href="{{ url('HR/dashboard') }}" class="nav-link nav-toggle">
-                            <!-- <h5 class="title head">HR</h5> -->
-                            <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
-                            <span class="title head">Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="nav-item secondary_bg font-white">
-                        <a href="#" class="nav-link nav-toggle">
-                            <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
-                            <span class="title head">Campaign Engine</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu ">
-                            <li class="nav-item  ">
-                                <a href="{{ route('hr.blog') }}" class="nav-link ">
-                                    <span class="title">Blog / Feed</span>
-                                </a>
-                            </li>
-                            <li class="nav-item  ">
-                                <a href="#" class="nav-link ">
-                                    <span class="title">Blog Submission</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item  secondary_bg font-white">
-                        <a href="#" class="nav-link nav-toggle">
-                            <img src="{{ asset('./assets/img/portfolio.svg') }}" class="highlight4" height="24" width="24" alt="">
-                            <span class="title head">Setting</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub-menu new1">
-                            <li class="nav-item  ">
-                                <a href="{{ url('setting/authorize') }}" class="nav-link ">
-                                    <span class="title">Authorization</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item  ">
-                                <a href="{{ url('setting/benefit') }}" class="nav-link ">
-                                    <span class="title">Benefit</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item  ">
-                                <a href="{{ url('setting/participent') }}" class="nav-link ">
-                                    <span class="title">Participation   Rights</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item  ">
-                                <a href="{{ url('setting/interest') }}" class="nav-link ">
-                                    <span class="title">Interest</span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a href="{{url('setting/interestuser')}}" class="nav-link ">
-                                    <span class="title">Interest Users</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item ">
-                                <a href="{{ url('setting/faqitem') }}" class="nav-link ">
-                                    <span class="title">FAQ item</span>
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a href="{{ url('setting/faq') }}" class="nav-link ">
-                                    <span class="title">FAQ</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item  secondary_bg font-white" >
-                        <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-                    
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
-
-                </li>
-            </ul>
-            <!-- END SIDEBAR MENU -->
-
-        </div>
-        <!-- END SIDEBAR -->
+            @endphp
+            {{$company_name['name']??''}}
+        </a>
     </div>
-    <!-- start body -->
+    <!-- END LOGO -->
 
-    @yield('content')
-    <!-- end body -->
+</header>
+<!-- End Header -->
+<div class="clearfix" style="background:#222a35;"> </div>
+<section class="section-pad section_pad_bt s992_pad">
+    <div class="page-sidebar-wrapper ">
+
+        <div class="page-sidebar navbar-collapse collapse">
+
+            <ul class="page-sidebar-menu page-sidebar-menu-light " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 6px">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <li class="nav-item secondary_bg">
+                    <a href="#" class="nav-link nav-toggle" style="background: white;">
+                        <img src="{{ asset('./assets/img/preview.svg') }}" class="highlight4" id="profile" height="45" width="24" alt="">
+                        <span class="title head" style="font-size:large;color:black;"><b><b>{{auth()->user()->name}}</b></b></span>
+                    </a>
+                </li>
+                <!-- END SIDEBAR TOGGLER BUTTON -->
+              <!--   <li class="nav-item secondary_bg font-white">
+                    <a href="{{ url('HR/dashboard') }}" class="nav-link nav-toggle">
+                        <h5 class="title head">HR</h5>
+                        <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
+                        <span class="title head">Dashboard</span>
+                    </a>
+                </li> -->
+                <li class="nav-item secondary_bg font-white">
+                    <a href="#" class="nav-link nav-toggle">
+                        <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
+                        <span class="title head">Campaign Engine</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li class="nav-item  ">
+                            <a href="{{ route('hr.blog') }}" class="nav-link ">
+                                <span class="title">Blog / Feed</span>
+                            </a>
+                        </li>
+                        <li class="nav-item  ">
+                            <a href="#" class="nav-link ">
+                                <span class="title">Blog Submission</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  secondary_bg font-white">
+                    <a href="#" class="nav-link nav-toggle">
+                        <img src="{{ asset('./assets/img/portfolio.svg') }}" class="highlight4" height="24" width="24" alt="">
+                        <span class="title head">Setting</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu new1">
+                        <li class="nav-item  ">
+                            <a href="{{ url('setting/authorize') }}" class="nav-link ">
+                                <span class="title">Authorization</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item  ">
+                            <a href="{{ url('setting/benefit') }}" class="nav-link ">
+                                <span class="title">Benefit</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item  ">
+                            <a href="{{ url('setting/participent') }}" class="nav-link ">
+                                <span class="title">Participation   Rights</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item  ">
+                            <a href="{{ url('setting/interest') }}" class="nav-link ">
+                                <span class="title">Interest</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{url('setting/interestuser')}}" class="nav-link ">
+                                <span class="title">Interest Users</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a href="{{ url('setting/faqitem') }}" class="nav-link ">
+                                <span class="title">FAQ item</span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{ url('setting/faq') }}" class="nav-link ">
+                                <span class="title">FAQ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item  secondary_bg font-white" >
+                    <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+
+            </li>
+        </ul>
+        <!-- END SIDEBAR MENU -->
+
+    </div>
+    <!-- END SIDEBAR -->
+</div>
+<!-- start body -->
+
+@yield('content')
+<!-- end body -->
 </section>
 <!-- Vendor JS Files -->
 <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>

@@ -32,14 +32,13 @@ class EMController extends Controller
      }
 
      public function decarbo(){
-        $customers = User::where('role_id',5)->orderBy('name', 'asc')->get();
+        // $customers = User::where('role_id',5)->orderBy('name', 'asc')->get();
         $types = Ideation::select('type')->orderBy('type', 'asc')->groupBy('type')->get();
         $ideations = Ideation::select('id','name')->orderBy('name', 'asc')->get();
         $attributes = Ideation::select('attribute')->orderBy('attribute', 'asc')->groupBy('attribute')->get();
         // $currencies = Currency::select('id','symbol')->orderBy('symbol', 'asc')->get();
-        $projects = Project::orderBy('id', 'desc')->get();
-
-        return view('EM.emdecarbo',compact('projects','types','attributes','customers','ideations'));
+        $projects = Project::where('customer_id',auth()->user()->customer_id)->orderBy('id', 'desc')->get();
+        return view('EM.emdecarbo',compact('projects','types','attributes','ideations'));
      }
 
      public function decarboproject(){
@@ -89,7 +88,6 @@ public function add_project(Request $request)
         'images' => 'required',
         'invoice_epc' => 'required',
         'sign_off' => 'required',
-        'customer_id' => 'required',
         'ideation_id' => 'required',
     ]);
 
@@ -107,7 +105,7 @@ public function add_project(Request $request)
     }
     $project = Project::create([
         'name' => $request->name,
-        'customer_id' => $request->customer_id,
+        'customer_id' => auth()->user()->customer_id,
         'ideation_id' => $request->ideation_id,
         'detail' => $request->details,
         'type' => $request->type,

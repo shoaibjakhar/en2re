@@ -95,7 +95,7 @@ class EmployeeController extends Controller
 	public function emission (){
 	
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
-		$projects = Project::where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
+		$projects = Project::where('customer_id',auth()->user()->customer_id)->where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
 
 		return view('Employee.emission',compact('projects'));
 	}

@@ -48,49 +48,52 @@
     <link href="{{ asset('assets/_start/simple.css') }}" rel="stylesheet" type="text/css" />
     <!-- =======================================================-->
     <style>
-   .alert-danger {
-            color: #ed6b75;
-            padding: 30px;
-            background: #ff000012;
-            border-radius: 12px;
-        }
-        .alert-success {
-            color: #26c281;
-            padding: 30px;
-            background: #00ff0c0f;
-            border-radius: 12px;
-        }
-        .info-doc{
-            color:#78b568;
-            font-size: 12px;
-        }
-        .glyphicon-trash
-        {
-            font-size: 14px;
-            color: #e43a45; 
-            /*margin-top: 20px;*/
-        }
-        .paginate_button {
-            /* padding: 10px; */
-            background-color: #062c46;
-            color: white;
-            margin: 3px;
-            border-radius: 3px;
-            padding-left: 5px;
-            padding-right: 5px;
-        }
-        .paginate_button a:hover {
-            cursor: pointer;
-            /*color: #23527c;*/
-        }
-        .dataTables_paginate .current{
-            background-color: #fff;
-            color: #062c46;
-        }
-        .dataTables_paginate, .paging_simple_numbers{
-            margin-bottom: 4px;
-        }
-    </style>
+       .alert-danger {
+        color: #ed6b75;
+        padding: 30px;
+        background: #ff000012;
+        border-radius: 12px;
+    }
+    .alert-success {
+        color: #26c281;
+        padding: 30px;
+        background: #00ff0c0f;
+        border-radius: 12px;
+    }
+    .info-doc{
+        color:#78b568;
+        font-size: 12px;
+    }
+    .glyphicon-trash
+    {
+        font-size: 14px;
+        color: #e43a45; 
+        /*margin-top: 20px;*/
+    }
+    .paginate_button {
+        /* padding: 10px; */
+        background-color: #062c46;
+        color: white;
+        margin: 3px;
+        border-radius: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .paginate_button a:hover {
+        cursor: pointer;
+        /*color: #23527c;*/
+    }
+    .dataTables_paginate .current{
+        background-color: #fff;
+        color: #062c46;
+    }
+    .dataTables_paginate, .paging_simple_numbers{
+        margin-bottom: 4px;
+    }
+    #company_name{
+        padding-top: 10px!important;
+    }
+</style>
 </head>
 
 <body>
@@ -116,9 +119,13 @@
 
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="{{route('em.dashboard')}}" class="logo me-auto login mr-0"><img src="{{ asset('assets/img/EN2RE_LOGO.png') }}" alt="" class="img-fluid filter-bg"></a>
+            <a href="#{{route('em.dashboard')}}" class="logo me-auto login" id="company_name">
+                @php
+                $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
 
-
+                @endphp
+                {{$company_name['name']??''}}
+            </a>
         </div>
         <!-- END LOGO -->
 
@@ -139,13 +146,12 @@
                         </a>
                     </li>
                     <!-- END SIDEBAR TOGGLER BUTTON -->
-                    <li class="nav-item secondary_bg font-white">
+                   <!--  <li class="nav-item secondary_bg font-white">
                         <a href="{{ url('em/dashboard') }}" class="nav-link nav-toggle">
-                            <!-- <h5 class="title head">EM</h5> -->
                             <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
                             <span class="title head">Dashboard</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item  secondary_bg font-white">
                         <a href="#" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/portfolio.svg') }}" class="highlight4" height="24" width="24" alt="">
@@ -181,7 +187,7 @@
                         document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
-                    
+
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>

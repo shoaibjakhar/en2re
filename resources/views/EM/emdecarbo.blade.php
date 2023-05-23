@@ -40,19 +40,10 @@
                                                             <label class="control-label left ">Project Name*</label>
                                                             <input type="text" value="{{old('name')}}" class="form-control" name="name" required />
                                                         </div>
-                                                           <div class="col-md-6">
-                                                            <label class="control-label left ">Customer*</label>
-                                                            <select name="customer_id" id="" class="form-control" required>
-                                                                @foreach($customers as $customer)
-                                                                <option value="{{$customer->id}}">{{ucfirst($customer->name)}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Detail* </label>
                                                             <input type="text" value="{{old('details')}}" class="form-control" name="details" required />
                                                         </div>
-
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Ideation*</label>
                                                             <select name="ideation_id" id="" class="form-control" required>
@@ -231,7 +222,7 @@
                                                                    <th>
                                                                        Status
                                                                    </th>
-                                                                   <th>Action</th>
+                                                                   <!-- <th>Action</th> -->
 
                                                                </tr>
                                                            </thead>
@@ -273,14 +264,14 @@
                                                              </td>
                                                              <td class="">   
                                                                 @if(isset($project->api_url) && $project->api_url !='')                       
-                                                                <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">Visit API</a>
+                                                                <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">API URL</a>
                                                                 @else
                                                                 N/A
                                                                 @endif
                                                             </td>
                                                             <td class="">   
                                                                 @if(isset($project->webcam_url) && $project->webcam_url !='')                       
-                                                                <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Visit URL</a>
+                                                                <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Webcam URL</a>
                                                                 @endif
                                                             </td>
                                                             <td>
@@ -296,10 +287,9 @@
                                                                <a href="#"  class="btn btn-danger">Rejected</a>
                                                                @endif
                                                            </td>
-                                                           <td class="">
-                                                            <!-- <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a> -->
+                                                          <!--  <td class="">
                                                             <a href="{{route('em.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
-                                                        </td>
+                                                        </td> -->
                                                     </tr>
                                                     @endforeach
 

@@ -45,7 +45,7 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Email*</label>
-                                                            <input type="email" value="{{old('email')}}" class="form-control" name="email" placeholder="example@gmail.com" />
+                                                            <input type="email" value="{{old('email')}}" class="form-control" name="emails[]" placeholder="example@gmail.com" />
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Password*</label>
@@ -68,7 +68,7 @@
                                                             <label class="control-label left ">Partner Questionnaire  <span class="info-doc">(Upload xls file)</span></label>
                                                             <input name="partner_questionnaire" class="form-control" type="file" accept="application/vnd.ms-excel" />
                                                         </div>
-                                                          <div class="col-md-6">
+                                                        <div class="col-md-6">
                                                             <label for="Region">Region Classification </label>
                                                             <select name="region" id="" class="form-control" value="{{old('region')}}">
                                                                 @foreach($regionClassification as $classification)
@@ -83,25 +83,50 @@
                                                             <input type="radio" checked name="partner_classification" id="No" value="no" />
                                                             <label for="No">No</label>
                                                         </div>
+                                                        <!-- em credentials -->
                                                         <div class="col-md-12">
-                                                            <h3>Customer Contact Info</h3>
-                                                        </div>
-                                                         <div class="col-md-6">
-                                                            <label class="control-label left ">Name </label>
-                                                            <input type="text" value="{{old('contact_person_name')}}" class="form-control" name="contact_person_name" placeholder="Contact Person Name" />
+                                                            <h3>EM Credentials</h3>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <label class="control-label left ">Email Address </label>
-                                                            <input type="email" value="{{old('contact_email')}}" class="form-control" name="contact_email" placeholder="email" />
+                                                            <label class="control-label left ">Name* </label>
+                                                            <input type="text" value="{{old('em_name')}}" class="form-control" name="em_name" placeholder="EM Name" />
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <label class="control-label left ">Role </label>
-                                                            <input type="text" value="{{old('role')}}" class="form-control" name="role" placeholder="Customer role" />
+                                                            <label class="control-label left ">Email*</label>
+                                                            <input type="email" value="{{old('em_email')}}" class="form-control" name="emails[]" placeholder="example@gmail.com" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Password* </label>
+                                                            <input type="password" value="{{old('em_password')}}" class="form-control" name="em_password" />
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Phone</label>
-                                                            <input type="tel" value="{{old('phone')}}" class="form-control" name="phone" placeholder="" />
+                                                            <input type="tel" value="{{old('em_phone')}}" class="form-control" name="em_phone"  />
                                                         </div>
+
+                                                        <!-- end em -->
+                                                        <div class="col-md-12">
+                                                            <h3>HR Credentials</h3>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Name* </label>
+                                                            <input type="text" value="{{old('hr_name')}}" class="form-control" name="hr_name" placeholder="HR Name" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Email*</label>
+                                                            <input type="email" value="{{old('hr_email')}}" class="form-control" name="emails[]" placeholder="example@gmail.com" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Password* </label>
+                                                            <input type="password" value="{{old('hr_password')}}" class="form-control" name="hr_password" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Phone</label>
+                                                            <input type="tel" value="{{old('hr_phone')}}" class="form-control" name="hr_phone" />
+                                                        </div>
+
+
+
                                                         <div class="col-md-12 col-lg-12 text-right">
                                                             <button type="submit" value="" class="btn btn-primary  text-center" >Submit</button>
                                                         </div>
@@ -171,13 +196,6 @@
                                                                             </th>
                                                                             <th > Email
                                                                             </th>
-                                                                             <th>
-                                                                                Contact Person Name
-                                                                            </th>
-                                                                            <th>Contact Person Phone
-                                                                            </th>
-                                                                            <th > Contact Email
-                                                                            </th>
                                                                             <th >Website URL
                                                                             </th>
                                                                             <th style="">
@@ -208,15 +226,11 @@
                                                                             <td class="">{{isset($customer->name)?$customer->name:'N/A'}}
                                                                             </td>
                                                                             <td class="">{{isset($customer->email)?$customer->email:'N/A'}}</td>
-                                                                            <td class="">{{isset($customer->customerContactInfo->name)?$customer->customerContactInfo->name:'N/A'}}</td>
-                                                                            <td class="">{{isset($customer->customerContactInfo->phone)?$customer->customerContactInfo->phone:'N/A'}}
-                                                                            </td>
-                                                                            <td class="">
-                                                                                {{isset($customer->customerContactInfo->email)?$customer->customerContactInfo->email:'N/A'}}</td>
+
                                                                                 <td class="">
                                                                                     @if(isset($customer->customer->website_url) && $customer->customer->website_url !='')
                                                                                     
-                                                                                    <a href="{{isset($customer->customer->website_url)?$customer->customer->website_url:''}}" target="_blank">Visit Website</a>
+                                                                                    <a href="{{isset($customer->customer->website_url)?$customer->customer->website_url:''}}" target="_blank">Website URL</a>
                                                                                     @else 
                                                                                     N/A
                                                                                     @endif
@@ -230,14 +244,14 @@
                                                                                 <td class=""> 
                                                                                     @if(isset($customer->customer->customer_contract) && $customer->customer->customer_contract !='')
                                                                                     <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_contract)}}" target="_blank">Open file</a>
-                                                                                     @else
+                                                                                    @else
                                                                                     N/A
                                                                                     @endif
                                                                                 </td>
                                                                                 <td class=""> 
                                                                                     @if(isset($customer->customer->customer_questionnaire) && $customer->customer->customer_questionnaire !='')
                                                                                     <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_questionnaire)}}" target="_blank">Download file</a>
-                                                                                     @else
+                                                                                    @else
                                                                                     N/A
                                                                                     @endif
                                                                                 </td>
@@ -249,38 +263,38 @@
                                                                                     @endif
                                                                                 </td>
                                                                                <!--  <td class=""> {{isset($customer->createdBy->name)?ucfirst($customer->createdBy->name):''}}
-                                                                                </td> -->
-                                                                                <td class="">
-                                                                                    <!--   <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a> -->
-                                                                                    <a href="{{ route('admin.customer.delete',$customer->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
-                                                                                </td>
+                                                                               </td> -->
+                                                                               <td class="">
+                                                                                <!--   <a href=""> <i class="bi bi-eye-fill text-dark" aria-hidden="true" style="font-size: 20px;;color: black;"></i></a> -->
+                                                                                <a href="{{ route('admin.customer.delete',$customer->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
+                                                                            </td>
 
-                                                                            </tr>
-                                                                            @endforeach
+                                                                        </tr>
+                                                                        @endforeach
 
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
-    @endsection
+@endsection
 
 
 

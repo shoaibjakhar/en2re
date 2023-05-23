@@ -22,4 +22,8 @@ class EmployeeInvestment extends Model
     {
         return $this->hasOne("App\Models\Project", "id","project_id");
     }
+    public function employee()
+    {
+        return $this->hasOne("App\Models\User", "id","employee_id");
+    }
 }

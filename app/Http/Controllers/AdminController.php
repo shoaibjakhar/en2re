@@ -19,6 +19,8 @@ use App\Models\GHGReductionClassification;
 use App\Models\EUEnergyClassification;
 use App\Models\EmployeeInvestment;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AdminController extends Controller
 {
@@ -41,13 +43,66 @@ class AdminController extends Controller
         return view('Admin.adminonboard',compact('customers','regionClassification'));
     }
     public function add_customer(Request $request){
+        $emails = $request->input('emails');
+
+        $rules = [
+            'emails' => 'required|array',
+            'emails.*' => [
+                'email',
+                Rule::unique('users', 'email'),
+            ],
+        ];
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         $request->validate([
             'name' => 'required|max:191',
-            'email' => 'required|email|unique:users|max:191',
-            // 'phone' => 'required|unique:users|max:191',
-            'password' => 'required|max:191',
+            'em_name' => 'required|max:191',
+            'hr_name' => 'required|max:191',
+            'password' => 'required|min:6|max:191',
+            'em_password' => 'required|min:6|max:191',
+            'hr_password' => 'required|min:6|max:191',
         ]);
+        $values;
+        $domains;
+ 
+        $check_domain = explode('@',$emails[0]);
+        $check_domain = $check_domain[1];
+        $exist_domain = Customer::where('email_domain',$check_domain)->pluck('id');
+        if($exist_domain->count())
+        {
+            return redirect()->back()->withErrors(['array' => 'This email domain already exist!']);
+        }
+        else
+        {
+
+        } 
+        foreach($emails as $key => $email)
+        {
+            $values[$key] = $email;
+            $domain = explode('@',$email);
+            $domains[$key] = $domain[1];
+        }
+        $uniqueValues = array_unique($values);
+        if (count($values) === count($uniqueValues)) {
+
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['array' => 'All emails must be unique.']);
+        }
+        $same_email_domain = array_unique($domains);
+
+        if (count($same_email_domain)==1) {
+
+        }
+        else
+        {
+            return redirect()->back()->withErrors(['array' => 'All emails domain must be same.']);
+        }
         $customer_contract ='';
         $customer_questionnaire ='';
         $partner_questionnaire= '';
@@ -66,18 +121,18 @@ class AdminController extends Controller
             $partner_questionnaire = time()."_partner_questionnaire.".$extension;
             $request->partner_questionnaire->move('uploads/customer-doc', $partner_questionnaire);
         }
+        $creater_id = auth()->user()->id;
         $user_id = User::insertGetId([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $emails[0],
             'role_id'=>5,
             'password' => Hash::make($request->password),
-            'created_by' => auth()->user()->id,
+            'created_by' =>$creater_id,
         ]);
-        Customer::create([
+        $customer_id = Customer::insertGetId([
             'user_id' => $user_id,
             'name' => $request->name,
-            // 'phone' => $request->phone,
-            // 'address' => $request->address,
+            'email_domain' =>$same_email_domain[0],
             'website_url' => $request->website_url,
             'customer_contract' => $customer_contract,
             'customer_questionnaire' => $customer_questionnaire,
@@ -85,15 +140,24 @@ class AdminController extends Controller
             'region_classification_id' => $request->region,
             'partner_classification' => $request->partner_classification,
         ]);
-        CustomerContactInfo::create([
-           'user_id' => $user_id,
-           'name'    =>$request->contact_person_name,
-           'phone' => $request->phone,
-           'email' => $request->contact_email,
-           // 'website_url' => $request->website_url,
-           'role'  => $request->role,
-           'website_url' => $request->website_url,
-       ]);
+        User::create([
+            'name' => $request->em_name,
+            'email' => $emails[1],
+            'phone' => $request->em_phone,
+            'role_id'=>3,
+            'password' => Hash::make($request->em_password),
+            'created_by' => $creater_id,
+            'customer_id' => $customer_id,
+        ]);
+        User::create([
+            'name' => $request->hr_name,
+            'email' => $emails[2],
+            'phone' => $request->hr_phone,
+            'role_id'=>2,
+            'password' => Hash::make($request->hr_password),
+            'created_by' =>  $creater_id,
+            'customer_id' => $customer_id,
+        ]);
 
         return redirect()->back()->with('success', 'Customer created successfully!');
     }
@@ -394,6 +458,14 @@ public function delete_authorization($id)
 {
     Authorization::find($id)->delete($id);
     return redirect()->back()->with('success', 'Authorization deleted successfully!');
+}
+public  function transections(){
+    $employee_investment = EmployeeInvestment::orderBy('id', 'desc')->get();
+    $number_of_transection = $employee_investment->count();
+    $totat_investment_amount = $employee_investment->sum('investment_amount');
+        //return $transection;
+    $projects = Project::where('status',4)->orderBy('id', 'desc')->get();
+    return view('Admin.transections',compact('employee_investment','projects','number_of_transection','totat_investment_amount'));
 }
 
 }

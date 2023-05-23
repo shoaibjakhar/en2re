@@ -98,13 +98,12 @@
                         </a>
                     </li>
                     <!-- END SIDEBAR TOGGLER BUTTON -->
-                    <li class="nav-item secondary_bg font-white">
+                    <!-- <li class="nav-item secondary_bg font-white">
                         <a href="{{ url('admin/dashboard') }}" class="nav-link nav-toggle">
-                            <!-- <h5 class="title head">EN2RE</h5> -->
                             <img src="{{ asset('./assets/img/dashboard.svg') }}" class="highlight4" height="24" width="24" alt="">
                             <span class="title head">Dashboard</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item secondary_bg font-white">
                         <a href="#" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/preview.svg') }}" class="highlight4" height="24" width="24" alt="">
@@ -164,6 +163,12 @@
                             </li>
                         </ul>
                     </li> -->
+                    <li class="nav-item  secondary_bg font-white">
+                        <a href="{{ route('admin.transections') }}" class="nav-link nav-toggle">
+                            <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
+                            <span class="title head">Transections</span>
+                        </a>
+                    </li>
                     <li class="nav-item  secondary_bg font-white">
                         <a href="{{ url('admin/ideation') }}" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">

@@ -68,9 +68,8 @@
 
 
             <div class="card-body">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST" action="{{ route('user.register') }}">
                     @csrf
-
                     
                     <label for="name" class="col-form-label text-md-end">{{ __('Name') }}</label>
 

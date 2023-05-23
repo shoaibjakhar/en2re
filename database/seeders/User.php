@@ -22,27 +22,6 @@ class User extends Seeder
     		'role_id' => 1,
     		'publication_status' =>1
     	]);
-    	DB::table('users')->insert([
-    		'name' =>'HR',
-    		'email'=>'hr@gmail.com',
-    		'password' => Hash::make('123456'),
-    		'role_id' => 2,
-    		'publication_status' =>1
-    	]);
-    	DB::table('users')->insert([
-    		'name' =>'EM',
-    		'email'=>'em@gmail.com',
-    		'password' => Hash::make('123456'),
-    		'role_id' => 3,
-    		'publication_status' =>1
-    	]);
-    	DB::table('users')->insert([
-    		'name' =>'Employee',
-    		'email'=>'employee@gmail.com',
-    		'password' => Hash::make('123456'),
-    		'role_id' => 4,
-    		'publication_status' =>1
-    	]);
 
     }
 }

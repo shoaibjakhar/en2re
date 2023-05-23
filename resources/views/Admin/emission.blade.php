@@ -239,14 +239,14 @@
                            </td>
                            <td class="">   
                             @if(isset($project->api_url) && $project->api_url !='')                       
-                            <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">Visit API</a>
+                            <a href="{{isset($project->api_url)?$project->api_url:''}}" target="_blank">API URL</a>
                             @else
                               N/A
                             @endif
                           </td>
                           <td class="">   
                             @if(isset($project->webcam_url) && $project->webcam_url !='')                       
-                            <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Visit URL</a>
+                            <a href="{{isset($project->webcam_url)?$project->webcam_url:''}}" target="_blank">Webcam URL</a>
                             @else
                               N/A
                             @endif
@@ -266,7 +266,7 @@
                           </td>
                           <td class="">
                            <a href="{{route('admin.project.edit',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
-                            <a href="{{route('admin.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a>
+                            <!-- <a href="{{route('admin.project.delete',$project->id)}}"> <span class="glyphicon glyphicon-trash" ></span></a> -->
                           </td>
                         </tr>
                         @endforeach

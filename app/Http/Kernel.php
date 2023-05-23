@@ -43,6 +43,18 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'protectAdmin'=>[
+            \App\Http\Middleware\Admin::class,
+        ],
+        'protectEM'=>[
+            \App\Http\Middleware\EM::class,
+        ],
+        'protectHR'=>[
+            \App\Http\Middleware\HR::class,
+        ],
+        'protectEmployee'=>[
+            \App\Http\Middleware\Employee::class,
+        ],
     ];
 
     /**
