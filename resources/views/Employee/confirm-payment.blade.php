@@ -65,7 +65,27 @@
   </div>
 </div>
 </div>
-<!-- <script src="https://js.stripe.com/v3/"></script> -->
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  var stripe = Stripe('pk_test_51KaezqEovF6hQW1HZ90ISJTksYOogoSJFgqZyqoRDLCSgnSeodYrEtw6KBs6XnG0s4f8C4tdzJDQovaaldfvki2x004dl46B5x');
+
+// Create a SEPA Direct Debit source
+stripe.createSource({
+  type: 'sepa_debit',
+  amount: 2000, // Amount in cents
+  currency: 'eur',
+  owner: {
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    address: {
+      line1: '123 Main Street',
+      city: 'Berlin',
+      postal_code: '12345',
+      country: 'DE',
+    },
+  },
+});
+</script>
 
 
 

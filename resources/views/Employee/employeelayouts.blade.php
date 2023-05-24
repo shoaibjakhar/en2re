@@ -141,7 +141,7 @@
     </a>
 
     <!-- BEGIN LOGO -->
-    <div class="page-logo">
+    <div class="logo-text">
         <a href="#{{route('employee.overview')}}" class="logo me-auto login" id="company_name">
             @php
             $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
@@ -170,16 +170,16 @@
                 <span class="title head" style="font-size:large;color:black;"><b>{{auth()->user()->name}}</b></span>
             </a>
             <ul class="sub-menu ">
-                <li class="nav-item  ">
+                <!-- <li class="nav-item  ">
                     <a href="{{ url('employee/changepassword') }}" class="nav-link ">
                         <span class="title">Change Password</span>
                     </a>
-                </li>
-                <li class="nav-item  ">
+                </li> -->
+                <!-- <li class="nav-item  ">
                     <a href="{{ url('employee/usersetting') }}" class="nav-link ">
                         <span class="title">User Setting</span>
                     </a>
-                </li>
+                </li> -->
             </ul>
 
         </li>
@@ -214,11 +214,11 @@
                         <span class="title">Transactions </span>
                     </a>
                 </li>
-                <li class="nav-item  ">
+              <!--   <li class="nav-item  ">
                     <a href="{{ url('employee/interest') }}" class="nav-link ">
                         <span class="title">Interest </span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </li>
@@ -230,23 +230,23 @@
                 <span class="arrow"></span>
             </a>
             <ul class="sub-menu new1">
-                <li class="nav-item  ">
+              <!--   <li class="nav-item  ">
                     <a href="{{ url('employee/impact') }}" class="nav-link ">
                         <span class="title">Impact
                         </span>
                     </a>
-                </li>
+                </li> -->
                 <li class="nav-item  ">
                     <a href="{{ url('employee/project') }}" class="nav-link ">
                         <span class="title">Projects
                         </span>
                     </a>
                 </li>
-                <li class="nav-item  ">
+                <!-- <li class="nav-item  ">
                     <a href="{{ url('employee/roadmap') }}" class="nav-link ">
                         <span class="title">Roadmap </span>
                     </a>
-                </li>
+                </li> -->
 
             </ul>
         </li>
@@ -264,16 +264,16 @@
                         </span>
                     </a>
                 </li>
-                <li class="nav-item  ">
+              <!--   <li class="nav-item  ">
                     <a href="{{ url('employee/ranking') }}" class="nav-link ">
                         <span class="title">Ranking </span>
                     </a>
-                </li>
-                <li class="nav-item  ">
+                </li> -->
+               <!--  <li class="nav-item  ">
                     <a href="{{ url('employee/score') }}" class="nav-link ">
                         <span class="title">Community Score </span>
                     </a>
-                </li>
+                </li> -->
             </ul>
         </li>
         <li class="nav-item secondary_bg font-white">

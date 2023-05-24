@@ -48,6 +48,7 @@ class HRController extends Controller
             'launch_date' => $request->launch_date,
             'campaign_message' => $request->campaign_message,
             'description' => $request->description,
+            'customer_id' => auth()->user()->customer_id,
         ]);
         $images = $request->file('images');
         foreach ($images as $image) {

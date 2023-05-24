@@ -36,7 +36,7 @@
                                                     <h4>Blog
                                                     </h4>
                                                     <div class="col-md-6">
-                                                        <label class="control-label left ">Blog Nmae</label>
+                                                        <label class="control-label left ">Blog Name</label>
                                                         <input type="text" value="{{old('name')}}" class="form-control" name="name" required />
                                                     </div>
                                                     <div class="col-md-6">

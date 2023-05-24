@@ -197,7 +197,7 @@ class EmployeeController extends Controller
 	}
 
 	public  function  blog(){
-		$blogs= Blog::orderBy('id','desc')->get();
+		$blogs= Blog::where('customer_id',auth()->user()->customer_id)->orderBy('id','desc')->get();
 		return view('Employee.blog',compact('blogs'));
 	}
 	public function blog_detail($id)

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('launch_date')->nullable();
             $table->text('campaign_message')->nullable();
             $table->text('description')->nullable();
+            $table->integer('customer_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

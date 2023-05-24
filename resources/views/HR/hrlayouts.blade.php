@@ -76,7 +76,7 @@
         </a>
 
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <div class="logo-text">
           <a href="#{{route('dashboard')}}" class="logo me-auto login" id="company_name">
             @php
             $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
@@ -123,11 +123,11 @@
                                 <span class="title">Blog / Feed</span>
                             </a>
                         </li>
-                        <li class="nav-item  ">
+                        <!-- <li class="nav-item  ">
                             <a href="#" class="nav-link ">
                                 <span class="title">Blog Submission</span>
                             </a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="nav-item  secondary_bg font-white">
@@ -137,7 +137,7 @@
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub-menu new1">
-                        <li class="nav-item  ">
+                       <!--  <li class="nav-item  ">
                             <a href="{{ url('setting/authorize') }}" class="nav-link ">
                                 <span class="title">Authorization</span>
                             </a>
@@ -164,7 +164,7 @@
                             <a href="{{url('setting/interestuser')}}" class="nav-link ">
                                 <span class="title">Interest Users</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item ">
                             <a href="{{ url('setting/faqitem') }}" class="nav-link ">

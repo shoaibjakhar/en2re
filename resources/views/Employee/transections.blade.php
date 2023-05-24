@@ -44,12 +44,12 @@
                                                             <th style="width: 88px;"> Your Total Investment
                                                             </th>
 
-                                                            <th style="width: 59px;"> Deposit/ Withdraw Investment
+                                                            <!-- <th style="width: 59px;"> Deposit/ Withdraw Investment
                                                             </th>
                                                             <th style="width: 59px;"> Wallet access
                                                             </th>
                                                             <th style="width: 59px;">
-                                                            </th>
+                                                            </th> -->
                                                         </tr>
                                                     </thead>
 
@@ -58,7 +58,7 @@
 
                                                             <td > {{isset($number_of_transection)?$number_of_transection:0;}} </td>
                                                             <td >${{isset($totat_investment_amount)?$totat_investment_amount:0;}}</td>
-                                                            <td >
+                                                           <!--  <td >
                                                                 <a data-toggle="modal"
                                                                 href="#add"><i class="fa fa-plus" aria-hidden="true"></i></a>
                                                                 <a data-toggle="modal"
@@ -71,7 +71,7 @@
                                                             </td>
                                                             <td  data-toggle="collapse" class="" data-target="#sample_5">
                                                                 <i class="bi bi-caret-up-fill" aria-hidden="true"></i>
-                                                            </td>
+                                                            </td> -->
 
                                                         </tr>
 

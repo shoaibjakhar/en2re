@@ -16,6 +16,7 @@ class Blog extends Model
 		'launch_date', 
 		'campaign_message',
 		'description',
+		'customer_id',
 	];
 
 

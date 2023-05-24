@@ -103,7 +103,7 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-md-12 mb-40 box-bd">
+                                            <div class="col-md-12 mb-40 box-bd" style="display: none">
                                                 <div class="col-md-4">
                                                     <h6 class="">
                                                          Web Cam

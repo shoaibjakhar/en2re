@@ -46,9 +46,15 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/page1.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/_start/simple.css') }}" rel="stylesheet" type="text/css" />
+
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">   
+
     <!-- =======================================================-->
     <style>
-       .alert-danger {
+     .alert-danger {
         color: #ed6b75;
         padding: 30px;
         background: #ff000012;
@@ -118,7 +124,7 @@
         </a>
 
         <!-- BEGIN LOGO -->
-        <div class="page-logo">
+        <div class="logo-text">
             <a href="#{{route('em.dashboard')}}" class="logo me-auto login" id="company_name">
                 @php
                 $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
@@ -175,12 +181,12 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item  secondary_bg font-white">
+                    <!-- <li class="nav-item  secondary_bg font-white">
                         <a href="#" class="nav-link nav-toggle">
                             <img src="{{ asset('./assets/img/community.svg') }}" class="highlight4" height="24" width="24" alt="">
                             <span class="title head">Data Extraction</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item  secondary_bg font-white" >
                         <a class="dropdown-item text-light bi-box-arrow-right" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -277,6 +283,8 @@
     @yield('content')
     <!-- end body -->
 </section>
+
+
 <!-- Vendor JS Files -->
 <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -288,11 +296,11 @@
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{ asset('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('ssets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
+<script src="{{ asset('ssets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script> -->
 <script src="{{ asset('assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/pages/scripts/table-datatables-managed.min.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('assets/pages/scripts/table-datatables-managed.min.js') }}" type="text/javascript"></script> -->
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
@@ -303,12 +311,23 @@
 
 
 
-<script src="{{ asset('assets/pages/scripts/form-wizard.min.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('assets/pages/scripts/form-wizard.min.js') }}" type="text/javascript"></script> -->
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main-load.js') }}"></script>
 <script src="{{ asset('assets/js/progress.js') }}"></script>
-<script src="{{ asset('assets/global/plugins/components-select2.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+<!-- <script src="{{ asset('assets/global/plugins/components-select2.min.js') }}" type="text/javascript"></script> -->
+<!-- <script src="{{ asset('assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+
+<!-- datatable cdn -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>/
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<!-- datatable cdn end-->
 <script>
     $('.panel-collapse').on('show.bs.collapse', function() {
         $(this).siblings('.panel-heading').addClass('active');
@@ -329,9 +348,22 @@
         $(this).find('.sub-menu').first().stop(true, true).delay(200).slideUp()
     });
 
-    $.fn.dataTable.ext.errMode = 'none';
-    var table = $('#sample_5').DataTable();
-    table.order( [ [0, 'asc'] ] ).draw();
+    // $.fn.dataTable.ext.errMode = 'none';
+    // var table = $('#sample_5').DataTable();
+    // table.order( [ [0, 'asc'] ] ).draw();
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#sample_5').DataTable( {
+            searching: 'true',
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
 </script>
 </body>
 

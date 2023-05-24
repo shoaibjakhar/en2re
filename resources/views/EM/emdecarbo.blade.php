@@ -166,7 +166,7 @@
                                             <div id="sample_5_wrapper" class="dataTables_wrapper">
                                                 <div class="table Add">
                                                     <div class="table-scrollable">
-                                                        <table class="collapse in table table-hover  order-column dataTable" id="sample_5" role="grid" aria-describedby="sample_5_info">
+                                                        <table class="collapse in table table-hover  order-column dataTable" id="sample_5" >
 
                                                             <thead>
                                                                 <tr role="row " class="secondary_bg font-white">

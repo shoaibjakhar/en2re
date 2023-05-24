@@ -194,8 +194,10 @@
                                                                             <th>
                                                                                 Customer Name
                                                                             </th>
-                                                                            <th > Email
+                                                                            <th >Customer Email
                                                                             </th>
+                                                                            <th>HR Email</th>
+                                                                            <th>EM Email</th>
                                                                             <th >Website URL
                                                                             </th>
                                                                             <th style="">
@@ -220,13 +222,17 @@
                                                                     <tbody>
                                                                         @foreach($customers as $key => $customer)
                                                                         <tr>
-
-                                                                            <td class="">{{($key+1)}}
+            @php
+            $hr_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',2)->first();
+             $em_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',3)->first();
+            @endphp
+                                                                       <td class="">{{($key+1)}}
                                                                             </td>
                                                                             <td class="">{{isset($customer->name)?$customer->name:'N/A'}}
                                                                             </td>
                                                                             <td class="">{{isset($customer->email)?$customer->email:'N/A'}}</td>
-
+                                                                            <td>{{$hr_email['email']??'N/A'}}</td>
+                                                                             <td>{{$em_email['email']??'N/A'}}</td>
                                                                                 <td class="">
                                                                                     @if(isset($customer->customer->website_url) && $customer->customer->website_url !='')
                                                                                     
