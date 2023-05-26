@@ -90,7 +90,7 @@ class EmployeeController extends Controller
 		$employee_investment = EmployeeInvestment::where('employee_id',auth()->user()->id)->orderBy('id', 'desc')->get();
 		$number_of_transection = $employee_investment->count();
 		$totat_investment_amount = $employee_investment->sum('investment_amount');
-		return view('Employee.overview',compact('number_of_transection','totat_investment_amount'));
+		return view('Employee.overview',compact('number_of_transection','totat_investment_amount','employee_investment'));
 	}
 	public function emission (){
 	
@@ -101,10 +101,12 @@ class EmployeeController extends Controller
 	}
 	public function investment($id)
 	{
+		$employee_investment = EmployeeInvestment::where('project_id',$id)->orderBy('id', 'desc')->get();
+		$totat_investment_amount = $employee_investment->sum('investment_amount');
 		$already_invested  = EmployeeInvestment::where('employee_id',auth()->user()->id)->pluck('project_id');
 		$projects = Project::where('id',$id)->where('status',4)->whereNotIn('id',$already_invested)->orderBy('id', 'desc')->get();
 		$project_edit = Project::where('id',$id)->first();
-		return view('Employee.emission',compact('projects','project_edit'));
+		return view('Employee.emission',compact('projects','project_edit','totat_investment_amount'));
 	}
 
 	public function add_investment(Request $request)
@@ -112,14 +114,17 @@ class EmployeeController extends Controller
 		$request->validate([
 			'employee_investment_amount' => 'required|numeric|min:0.5',
 		]);
-
+		$stripe_public_key = Customer::where('id',auth()->user()->customer_id)->pluck('public_key');
+		$stripe_public_key = $stripe_public_key[0];
 		$email = User::where('id',auth()->user()->id)->pluck('email');
 		$emp_email = $email[0]; 
-		return view('Employee.confirm-payment',compact('request','emp_email'));
+		return view('Employee.confirm-payment',compact('request','emp_email','stripe_public_key'));
 	}
 	public function stripe(Request $request)
 	{
-		Stripe::setApiKey(env('STRIPE_SECRET'));
+		$stripe_secret_key = Customer::where('id',auth()->user()->customer_id)->pluck('secret_key');
+		$stripe_secret_key = $stripe_secret_key[0];
+		Stripe::setApiKey($stripe_secret_key);
 
 		try {
             // Call a Stripe API method that may throw an error

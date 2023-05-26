@@ -76,15 +76,15 @@
         </a>
 
         <!-- BEGIN LOGO -->
-        <div class="logo-text">
-          <a href="#{{route('dashboard')}}" class="logo me-auto login" id="company_name">
-            @php
-            $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
-
-            @endphp
-            {{$company_name['name']??''}}
-        </a>
-    </div>
+         <div class="logo-text">
+            <a href="#{{route('em.dashboard')}}" class="logo me-auto login" >
+                @php
+                $company_logo = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
+                @endphp
+                <!-- {{$company_logo['logo']??''}} -->
+                <img src="{{ asset('/uploads/customer-doc/'.$company_logo['logo']??'')}}" alt="logo image" class="img-fluid filter-bg">
+            </a>
+        </div>
     <!-- END LOGO -->
 
 </header>

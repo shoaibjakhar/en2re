@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('partner_questionnaire')->nullable();
             $table->integer('region_classification_id')->nullable();
             $table->string('partner_classification')->nullable();
+            $table->string('participation_right_file')->nullable();
+            $table->string('logo')->nullable();
+            $table->text('public_key')->nullable();
+            $table->text('secret_key')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrentOnUpdate()->nullable();
         });

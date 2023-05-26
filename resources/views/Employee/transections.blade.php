@@ -18,31 +18,31 @@
                                             <div class="col-md-12 mb-40 box-bd">
                                               @if (session('success'))
                                               <div class="alert-success pl-40">
-                                               {{ session('success') }}
-                                           </div>
-                                           @endif
-                                           <div class="col-md-8">
-                                            <h4 class="">
-                                              <strong> Transactions</strong> 
-                                          </h4>
+                                                 {{ session('success') }}
+                                             </div>
+                                             @endif
+                                             <div class="col-md-8">
+                                                <h4 class="">
+                                                  <strong> Transactions</strong> 
+                                              </h4>
+                                          </div>
                                       </div>
-                                  </div>
 
-                                  <div class="col-md-12 mb-40 box-bd">
-                                    <div class="portlet-body filter-none">
-                                        <div id="sample_5_wrapper" class="dataTables_wrapper">
-                                            <div class="table Add">
-                                                <div class="table-scrollable">
-                                                    <table class="table table-hover  order-column dataTable" role="grid"
-                                                    aria-describedby="sample_5_info">
-                                                    <thead>
-                                                        <tr class="secondary_bg font-white">
+                                      <div class="col-md-12 mb-40 box-bd">
+                                        <div class="portlet-body filter-none">
+                                            <div id="sample_5_wrapper" class="dataTables_wrapper">
+                                                <div class="table Add">
+                                                    <div class="table-scrollable">
+                                                        <table class="table table-hover  order-column dataTable" role="grid"
+                                                        aria-describedby="sample_5_info">
+                                                        <thead>
+                                                            <tr class="secondary_bg font-white">
 
-                                                            <th style="width: 88px;">
-                                                                #Amount of Transactions
-                                                            </th>
-                                                            <th style="width: 88px;"> Your Total Investment
-                                                            </th>
+                                                                <th style="width: 88px;">
+                                                                    #Amount of Transactions
+                                                                </th>
+                                                                <th style="width: 88px;"> Your Total Investment
+                                                                </th>
 
                                                             <!-- <th style="width: 59px;"> Deposit/ Withdraw Investment
                                                             </th>
@@ -91,8 +91,8 @@
                                                     <th>Payment Id</th>
                                                     <th>Date of Investment</th>
                                                     <th>Interest Rate</th>
-                                                    <th>Genussrecht Vertrag</th>
-                                                    <th>Purchasing Contract</th>
+                                                    <th>Interest Amount</th>
+                                                    <!-- <th>Purchasing Contract</th> -->
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -104,9 +104,27 @@
                                                     <td>${{isset($investment->investment_amount)?$investment->investment_amount:'';}}</td>
                                                     <td>{{isset($investment->payment_id)?$investment->payment_id:'N/A';}}</td>
                                                     <td> {{isset($investment->created_at)?date('Y-m-d',strtotime($investment->created_at)):'';}}</td>
-                                                    <td>(pending) %</td>
-                                                    <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
-                                                    <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td>
+                                                    <td> 5%/year</td>
+                                                    <td>
+                                                    <?php
+                                                        $date =Date('Y-m-d',strtotime($investment->created_at));
+                                                        $startDate = new DateTime($date); 
+                                                        $endDate = new DateTime(Date('Y-m-d'));
+
+                                                        $interval = $startDate->diff($endDate);
+                                                        $yearsDifference = $interval->y;
+
+                                                        // echo $yearsDifference;
+                                                        $interest_amount = 0;
+                                                        if($yearsDifference>0)
+                                                        {
+                                                            $interest_amount = ($investment->investment_amount/100) *5 *$yearsDifference;
+                                                        }
+                                                         echo '$'.$interest_amount;
+                                                        
+                                                    ?>
+                                                    </td>
+                                                    <!-- <td><i class="bi bi-link-45deg" aria-hidden="true"></i></td> -->
                                                 </tr>
                                                 @endforeach
                                             </tbody>

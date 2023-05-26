@@ -1,5 +1,28 @@
 @extends('Employee.employeelayouts')
 @section('content')
+        @php 
+         $sum_of_total_interest = 0; 
+         @endphp
+
+     @foreach($employee_investment as $key => $investment)                                       
+     <?php
+        $date =Date('Y-m-d',strtotime($investment->created_at));
+        $startDate = new DateTime($date); 
+        $endDate = new DateTime(Date('Y-m-d'));
+
+        $interval = $startDate->diff($endDate);
+        $yearsDifference = $interval->y;
+
+        // echo $yearsDifference;
+        $interest_amount = 0;
+        if($yearsDifference>0)
+        {
+            $interest_amount = ($investment->investment_amount/100) *5 *$yearsDifference;
+        }
+         echo '$'.$interest_amount;
+        $sum_of_total_interest+=$interest_amount;
+    ?>
+ @endforeach
 
      
 
@@ -41,44 +64,20 @@
                                                                     <tr role="row "
                                                                         class="secondary_bg font-white">
 
-                                                                        <th class="sorting_asc  "
-                                                                            tabindex="0"
-                                                                            aria-controls="sample_5"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-sort="ascending"
-                                                                            aria-label=" Auditor : activate to sort column descending"
-                                                                            style="width: 88px;">
+                                                                        <th >
                                                                             #Amount of Transactions </th>
-                                                                        <th class="" tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" Name : activate to sort column ascending"
-                                                                            style="width: 88px;"> Your Total
+                                                                        <th > Your Total
                                                                             Investment  </th>
-
-                                                                        <th class="  " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Interest received (total)
+                                                                        <th>
+                                                                            Total Interest
                                                                         </th>
-                                                                        <th class="  " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Interest received (next)
+                                                                        <th > Interest received (total)
                                                                         </th>
-                                                                        <th class="  " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Interest receiving date 
+                                                                        <th > Interest received (next)
                                                                         </th>
-                                                                        <th class=" " tabindex="0"
-                                                                            aria-controls="sample_4"
-                                                                            rowspan="1" colspan="1"
-                                                                            aria-label=" action : activate to sort column ascending"
-                                                                            style="width: 59px;"> Your Share of Total Emitted Volume 
+                                                                        <th > Interest receiving date 
+                                                                        </th>
+                                                                        <th> Your Share of Total Emitted Volume 
                                                                         </th>
                                                                        
 
@@ -89,6 +88,7 @@
                                                                     <tr class="gradeX odd" role="row">
                                                                         <td >{{isset($number_of_transection)? $number_of_transection:'N/A'}}</td>
                                                                         <td >${{isset($totat_investment_amount)? $totat_investment_amount:'N/A'}}</td>
+                                                                        <td>${{$sum_of_total_interest}}</td>
                                                                         <td >N/A</td>
                                                                         <td >N/A
                                                                         </td>

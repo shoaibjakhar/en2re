@@ -20,6 +20,10 @@ class Customer extends Model
 		'partner_questionnaire',
 		'region_classification_id',
 		'partner_classification',
+		'participation_right_file',
+		'logo',
+		'public_key',
+		'secret_key',
 	];
 
 	public function regionName()

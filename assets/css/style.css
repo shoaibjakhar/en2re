@@ -319,7 +319,7 @@ a.question.font-white:hover {
   }
 
   #header .logo img {
-    max-height: 65px;
+    max-height: 61px!important;
   }
 
 /*--------------------------------------------------------------
@@ -679,7 +679,7 @@ a.question.font-white:hover {
     }
 
     #header .logo img {
-      max-height:65px !important;
+      max-height:61px !important;
     }
 
     .ml-res {

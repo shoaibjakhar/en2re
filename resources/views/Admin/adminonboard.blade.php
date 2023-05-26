@@ -20,17 +20,17 @@
                                             <div class="col-md-12  justify-space-between">
                                                 <div class="col-md-12 mb-40 box-bd">
 
-                                                   @if ($errors->any())
-                                                   <div class="alert-danger pl-40">
-                                                       <ol>
-                                                           @foreach ($errors->all() as $error)
-                                                           <li style="list-style-type:square !important">{{$error}}</li>
-                                                           @endforeach
-                                                       </ol>
-                                                   </div>
-                                                   @endif
-                                                   @if (session('success'))
-                                                   <div class="alert-success pl-40">
+                                                 @if ($errors->any())
+                                                 <div class="alert-danger pl-40">
+                                                     <ol>
+                                                         @foreach ($errors->all() as $error)
+                                                         <li style="list-style-type:square !important">{{$error}}</li>
+                                                         @endforeach
+                                                     </ol>
+                                                 </div>
+                                                 @endif
+                                                 @if (session('success'))
+                                                 <div class="alert-success pl-40">
                                                     {{ session('success') }}
                                                 </div>
                                                 @endif
@@ -57,8 +57,12 @@
                                                         </div>
 
                                                         <div class="col-md-6">
-                                                            <label class="control-label left ">Contract or letter-of-intend <span class="info-doc">(Upload pdf file)</span></label>
+                                                            <label class="control-label left ">Contract Or Letter Of Intend <span class="info-doc">(Upload pdf file)</span></label>
                                                             <input name="customer_contract" class="form-control" type="file" accept="application/pdf" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Participation Right File <span class="info-doc">(Upload pdf file)</span></label>
+                                                            <input name="participation_right_file" class="form-control" type="file" accept="application/pdf" />
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label class="control-label left ">Customer Questionnaire  <span class="info-doc">(Upload xls file)</span></label>
@@ -75,6 +79,10 @@
                                                                 <option value="{{ $classification->id}}">{{ $classification->name}}</option>
                                                                 @endforeach
                                                             </select>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Logo Image* </label>
+                                                            <input name="logo" class="form-control" type="file" accept="image/png, image/jpeg, image/jpeg"/>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label>Partner Classification</label><br>
@@ -125,7 +133,18 @@
                                                             <input type="tel" value="{{old('hr_phone')}}" class="form-control" name="hr_phone" />
                                                         </div>
 
+                                                        <div class="col-md-12">
+                                                            <h3>Stripe Details</h3>
+                                                        </div>
 
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Public key* </label>
+                                                            <input type="text" value="{{old('public_key')}}" class="form-control" name="public_key" />
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="control-label left ">Secret key*</label>
+                                                            <input type="text" value="{{old('secret_key')}}" class="form-control" name="secret_key" />
+                                                        </div>
 
                                                         <div class="col-md-12 col-lg-12 text-right">
                                                             <button type="submit" value="" class="btn btn-primary  text-center" >Submit</button>
@@ -207,6 +226,7 @@
                                                                                 Partner Classification
                                                                             </th>
                                                                             <th style="">Customer Contract</th>
+                                                                            <th style="">Participation Right File</th>
                                                                             <th style="">Customer Questionnaire</th>
                                                                             <th style="">Partner Questionnaire</th>
                                                                            <!--  <th style="">
@@ -222,52 +242,59 @@
                                                                     <tbody>
                                                                         @foreach($customers as $key => $customer)
                                                                         <tr>
-            @php
-            $hr_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',2)->first();
-             $em_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',3)->first();
-            @endphp
-                                                                       <td class="">{{($key+1)}}
+                                                                            @php
+                                                                            $hr_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',2)->first();
+                                                                            $em_email = App\Models\User::where('customer_id',$customer->customer->id)->where('role_id',3)->first();
+                                                                            @endphp
+                                                                            <td class="">{{($key+1)}}
                                                                             </td>
                                                                             <td class="">{{isset($customer->name)?$customer->name:'N/A'}}
                                                                             </td>
                                                                             <td class="">{{isset($customer->email)?$customer->email:'N/A'}}</td>
                                                                             <td>{{$hr_email['email']??'N/A'}}</td>
-                                                                             <td>{{$em_email['email']??'N/A'}}</td>
-                                                                                <td class="">
-                                                                                    @if(isset($customer->customer->website_url) && $customer->customer->website_url !='')
-                                                                                    
-                                                                                    <a href="{{isset($customer->customer->website_url)?$customer->customer->website_url:''}}" target="_blank">Website URL</a>
-                                                                                    @else 
-                                                                                    N/A
-                                                                                    @endif
-                                                                                </td>
+                                                                            <td>{{$em_email['email']??'N/A'}}</td>
+                                                                            <td class="">
+                                                                                @if(isset($customer->customer->website_url) && $customer->customer->website_url !='')
 
-                                                                                <td class="">
-                                                                                    {{isset($customer->customer->regionName->name)?$customer->customer->regionName->name:'N/A'}}
-                                                                                </td>
-                                                                                <td class=""> {{isset($customer->customer->partner_classification)?ucfirst($customer->customer->partner_classification):'N/A'}}
-                                                                                </td>
-                                                                                <td class=""> 
-                                                                                    @if(isset($customer->customer->customer_contract) && $customer->customer->customer_contract !='')
-                                                                                    <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_contract)}}" target="_blank">Open file</a>
-                                                                                    @else
-                                                                                    N/A
-                                                                                    @endif
-                                                                                </td>
-                                                                                <td class=""> 
-                                                                                    @if(isset($customer->customer->customer_questionnaire) && $customer->customer->customer_questionnaire !='')
-                                                                                    <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_questionnaire)}}" target="_blank">Download file</a>
-                                                                                    @else
-                                                                                    N/A
-                                                                                    @endif
-                                                                                </td>
-                                                                                <td class=""> 
-                                                                                    @if(isset($customer->customer->partner_questionnaire) && $customer->customer->partner_questionnaire !='')
-                                                                                    <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->partner_questionnaire)}}" target="_blank">Download file</a>
-                                                                                    @else
-                                                                                    N/A
-                                                                                    @endif
-                                                                                </td>
+                                                                                <a href="{{isset($customer->customer->website_url)?$customer->customer->website_url:''}}" target="_blank">Website URL</a>
+                                                                                @else 
+                                                                                N/A
+                                                                                @endif
+                                                                            </td>
+
+                                                                            <td class="">
+                                                                                {{isset($customer->customer->regionName->name)?$customer->customer->regionName->name:'N/A'}}
+                                                                            </td>
+                                                                            <td class=""> {{isset($customer->customer->partner_classification)?ucfirst($customer->customer->partner_classification):'N/A'}}
+                                                                            </td>
+                                                                            <td class=""> 
+                                                                                @if(isset($customer->customer->customer_contract) && $customer->customer->customer_contract !='')
+                                                                                <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_contract)}}" target="_blank">Open file</a>
+                                                                                @else
+                                                                                N/A
+                                                                                @endif
+                                                                            </td>
+                                                                            <td class=""> 
+                                                                                @if(isset($customer->customer->participation_right_file) && $customer->customer->participation_right_file !='')
+                                                                                <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->participation_right_file)}}" target="_blank">Open file</a>
+                                                                                @else
+                                                                                N/A
+                                                                                @endif
+                                                                            </td>
+                                                                            <td class=""> 
+                                                                                @if(isset($customer->customer->customer_questionnaire) && $customer->customer->customer_questionnaire !='')
+                                                                                <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->customer_questionnaire)}}" target="_blank">Download file</a>
+                                                                                @else
+                                                                                N/A
+                                                                                @endif
+                                                                            </td>
+                                                                            <td class=""> 
+                                                                                @if(isset($customer->customer->partner_questionnaire) && $customer->customer->partner_questionnaire !='')
+                                                                                <a href="{{ asset('/uploads/customer-doc/'.$customer->customer->partner_questionnaire)}}" target="_blank">Download file</a>
+                                                                                @else
+                                                                                N/A
+                                                                                @endif
+                                                                            </td>
                                                                                <!--  <td class=""> {{isset($customer->createdBy->name)?ucfirst($customer->createdBy->name):''}}
                                                                                </td> -->
                                                                                <td class="">

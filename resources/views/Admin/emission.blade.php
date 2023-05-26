@@ -253,15 +253,15 @@
                           </td>
                           <td>
                             @if($project->status == 'Pending')                       
-                            <a href="#" target="_blank" class="btn btn-primary">{{$project->status}}</a>
+                            <a class="btn btn-primary">{{$project->status}}</a>
                             @elseif($project->status == 'Reviewed') 
-                            <a href="#" target="_blank" class="btn btn-warning">{{$project->status}}</a>
+                            <a class="btn btn-warning">{{$project->status}}</a>
                             @elseif($project->status == 'Approve request') 
-                            <a href="#"  class="btn btn-warning">Requested</a>
+                            <a class="btn btn-warning">Requested</a>
                             @elseif($project->status == 'Approved') 
-                            <a href="#"  class="btn btn-success">Approved</a>
+                            <a class="btn btn-success">Approved</a>
                             @elseif($project->status == 'Rejected') 
-                            <a href="#"  class="btn btn-danger">Rejected</a>
+                            <a class="btn btn-danger">Rejected</a>
                             @endif
                           </td>
                           <td class="">

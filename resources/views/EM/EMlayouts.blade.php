@@ -125,12 +125,12 @@
 
         <!-- BEGIN LOGO -->
         <div class="logo-text">
-            <a href="#{{route('em.dashboard')}}" class="logo me-auto login" id="company_name">
+            <a href="#{{route('em.dashboard')}}" class="logo me-auto login" >
                 @php
-                $company_name = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
-
+                $company_logo = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
                 @endphp
-                {{$company_name['name']??''}}
+                <!-- {{$company_logo['logo']??''}} -->
+                <img src="{{ asset('/uploads/customer-doc/'.$company_logo['logo']??'')}}" alt="logo image" class="img-fluid filter-bg">
             </a>
         </div>
         <!-- END LOGO -->

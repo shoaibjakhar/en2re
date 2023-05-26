@@ -76,8 +76,6 @@
         <!-- BEGIN LOGO -->
         <div class="page-logo">
             <a href="{{url('admin/dashboard')}}" class="logo me-auto login"><img src="{{ asset('assets/img/EN2RE_LOGO.png') }}" alt="" class="img-fluid filter-bg"></a>
-
-
         </div>
         <!-- END LOGO -->
 

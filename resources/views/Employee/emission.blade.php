@@ -2,20 +2,16 @@
 @section('content')
 <!-- start database table -->
 <div class=" page-content-wrapper">
-
   <div class="page-content hero2">
     <div class="portlet light bordered " id="form_wizard_1">
       <div class="portlet-body form">
         <div class="row">
-
           <div class="col-md-12 mx-0">
             <div>
               <div class="form-group ">
-
                 <div class="left">
                   <div class="wrapper center-block">
                     <div class="left">
-
                      <div class="wrapper center-block">
                       <div class="left">
                         <div class="col-md-12  justify-space-between">
@@ -54,11 +50,21 @@
                                 <input type="text" value="${{isset($project_edit->investment_amount)?$project_edit->investment_amount:''}}" class="form-control" name="investment_amount" readonly />
                               </div> 
                               <div class="col-md-6">
+                                <?php 
+                                  $remaning_amount = $project_edit->investment_amount-$totat_investment_amount;
+                                ?>
                                 <label class="control-label left ">Add Your Investment Amount($)* </label>
-                                <input name="employee_investment_amount" class="form-control" type="number" min='0.5' step="0.1"  required placeholder="0.00" />
+                                <input name="employee_investment_amount" class="form-control" type="number" min='0.5' max='{{$remaning_amount}}' step="0.1"  required placeholder="0.00" />
+                                
+                                  @if($remaning_amount> 0.5)
+                                  <span class="text-success"> You can investment maximum ${{$remaning_amount}}</span>
+                                   @else
+                                 <span class="text-danger">  Investment of this project were closed, you can invest an other!</span>
+                                   @endif
+                                
                               </div>                       
                               <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Add</button>
+                                <button type="submit" class="btn btn-primary mt-4" style="margin-left: px;">Add Investment</button>
                               </div>
 
                             </div>
@@ -120,7 +126,6 @@
                                 <th>Ideation</th>
                                 <th style=""> Detail
                                 </th>
-
                                 <th style="">Type
                                 </th>
                                 <th style="">
@@ -156,7 +161,8 @@
                                 <th style="">
                                  Webcam URL
                                </th>
-                               <!-- <th>Status</th> -->
+
+                                <th style="">Participation Right File</th>
                                <th>Action</th>
                              </tr>
                            </thead>
@@ -213,8 +219,18 @@
                               N/A
                               @endif
                             </td>
+                            <td>
+                            @php
+                            $participation_right_file = App\Models\Customer::where('id',auth()->user()->customer_id)->first();
+                            @endphp
+                              @if(isset($participation_right_file['participation_right_file']) && $participation_right_file['participation_right_file'] !='')
+                                <a href="{{ asset('/uploads/customer-doc/'.$participation_right_file['participation_right_file'])}}" target="_blank">Open file</a>
+                                @else
+                                N/A
+                                @endif
+                          </td>
                             <td class="">
-                             <a href="{{route('employee.investment',$project->id)}}"> <span class="glyphicon glyphicon-edit text-success" ></span>
+                             <a class="btn btn-success" href="{{route('employee.investment',$project->id)}}">Invest Now
                              </td>
                            </tr>
                            @endforeach

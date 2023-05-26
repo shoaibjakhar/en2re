@@ -65,6 +65,9 @@ class AdminController extends Controller
             'password' => 'required|min:6|max:191',
             'em_password' => 'required|min:6|max:191',
             'hr_password' => 'required|min:6|max:191',
+            'logo' => 'required',
+            'public_key' => 'required|min:6',
+            'secret_key' => 'required|min:6',
         ]);
         $values;
         $domains;
@@ -106,6 +109,8 @@ class AdminController extends Controller
         $customer_contract ='';
         $customer_questionnaire ='';
         $partner_questionnaire= '';
+        $logo= '';
+        $participation_right_file = '';
         if($request->hasFile('customer_contract') && $request->customer_contract->isValid()){
             $extension = $request->customer_contract->extension();
             $customer_contract = time()."_contract.".$extension;
@@ -121,6 +126,17 @@ class AdminController extends Controller
             $partner_questionnaire = time()."_partner_questionnaire.".$extension;
             $request->partner_questionnaire->move('uploads/customer-doc', $partner_questionnaire);
         }
+        if($request->hasFile('participation_right_file') && $request->participation_right_file->isValid()){
+            $extension = $request->participation_right_file->extension();
+            $participation_right_file = time()."_participation_right_file.".$extension;
+            $request->participation_right_file->move('uploads/customer-doc', $participation_right_file);
+        }
+        if($request->hasFile('logo') && $request->logo->isValid()){
+            $extension = $request->logo->extension();
+            $logo = time()."_logo.".$extension;
+            $request->logo->move('uploads/customer-doc', $logo);
+        }
+
         $creater_id = auth()->user()->id;
         $user_id = User::insertGetId([
             'name' => $request->name,
@@ -139,6 +155,10 @@ class AdminController extends Controller
             'partner_questionnaire' => $partner_questionnaire,
             'region_classification_id' => $request->region,
             'partner_classification' => $request->partner_classification,
+            'participation_right_file' => $participation_right_file,
+            'logo' => $logo,
+            'public_key' => $request->public_key,
+            'secret_key' => $request->secret_key,
         ]);
         User::create([
             'name' => $request->em_name,
